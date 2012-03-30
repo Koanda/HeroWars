@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LOLEmulator", "LOLProxy\LOLProxy.vcxproj", "{44354D7F-E9B3-47DB-9F4D-C56E0FD91050}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Injector", "Injector\Injector.vcxproj", "{CDC7336A-7D8D-47DF-AC38-F744E7DBD188}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LOLDllProxy", "LOLDllProxy\LOLDllProxy.vcxproj", "{C6FBA648-711D-49FA-A538-06DA9546F67E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{44354D7F-E9B3-47DB-9F4D-C56E0FD91050} = {44354D7F-E9B3-47DB-9F4D-C56E0FD91050}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{44354D7F-E9B3-47DB-9F4D-C56E0FD91050}.Debug|Win32.ActiveCfg = Debug|Win32
+		{44354D7F-E9B3-47DB-9F4D-C56E0FD91050}.Debug|Win32.Build.0 = Debug|Win32
+		{44354D7F-E9B3-47DB-9F4D-C56E0FD91050}.Release|Win32.ActiveCfg = Release|Win32
+		{44354D7F-E9B3-47DB-9F4D-C56E0FD91050}.Release|Win32.Build.0 = Release|Win32
+		{CDC7336A-7D8D-47DF-AC38-F744E7DBD188}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CDC7336A-7D8D-47DF-AC38-F744E7DBD188}.Debug|Win32.Build.0 = Debug|Win32
+		{CDC7336A-7D8D-47DF-AC38-F744E7DBD188}.Release|Win32.ActiveCfg = Release|Win32
+		{CDC7336A-7D8D-47DF-AC38-F744E7DBD188}.Release|Win32.Build.0 = Release|Win32
+		{C6FBA648-711D-49FA-A538-06DA9546F67E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C6FBA648-711D-49FA-A538-06DA9546F67E}.Debug|Win32.Build.0 = Debug|Win32
+		{C6FBA648-711D-49FA-A538-06DA9546F67E}.Release|Win32.ActiveCfg = Release|Win32
+		{C6FBA648-711D-49FA-A538-06DA9546F67E}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
