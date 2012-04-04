@@ -47,6 +47,7 @@ Release
 *.suo
 *.ncb
 *.webinfo
+*.sdf
 
 # Subversion data folders
 .svn/
