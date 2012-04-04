@@ -1,0 +1,1 @@
+#define MSC_VER_REQUIRED 1500

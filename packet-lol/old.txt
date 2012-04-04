@@ -1,0 +1,115 @@
+		//enetNode = proto_tree_add_item(tree, proto_lol, tvb, 0, -1, FALSE);
+		//lolTree = proto_item_add_subtree(enetTree, ett_lol);
+		
+		//proto_tree_add_item(lol_tree, hf_lol_magic, tvb, offset, 4, FALSE); offset += 4;
+		//proto_tree_add_item(lol_tree, hf_lol_tracking, tvb, offset, 1, FALSE); offset += 1;
+		//proto_tree_add_item(lol_tree, hf_lol_function, tvb, offset, 1, FALSE); offset += 1;
+		//if(packet_tracking == 0x80)
+		//{
+		//	proto_tree_add_item(lol_tree, hf_lol_unique, tvb, offset, 2, FALSE); offset += 2;
+		//}
+		
+
+
+		{ &hf_lol_magic,
+			{ "Magic number", "lol.magic",
+			FT_UINT32, BASE_HEX,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_tracking,
+			{ "Tracking", "lol.tracking",
+			FT_UINT8, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_function,
+			{ "Function", "lol.function",
+			FT_UINT8, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_unique,
+			{ "Unique number", "lol.unique",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_packet,
+			{ "Packet", "lol.packet",
+			FT_NONE, BASE_NONE,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_type,
+			{ "Type", "lol.type",
+			FT_UINT8, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_class,
+			{ "Class", "lol.class",
+			FT_UINT8, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_unknown16,
+			{ "Unknown 16", "lol.unknown16",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_length,
+			{ "Length", "lol.length",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_data,
+			{ "Data", "lol.data",
+			FT_NONE, BASE_NONE,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_ack,
+			{ "Ack", "lol.ack",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_acking,
+			{ "Acking", "lol.acking",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_segment_size,
+			{ "Segment size", "lol.segment_size",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_total_packets,
+			{ "Total packets", "lol.total_packets",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_sequence,
+			{ "Sequence number", "lol.sequence",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_total_size,
+			{ "Total size", "lol.total_size",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		},
+		{ &hf_lol_previous_size,
+			{ "Previous size", "lol.previous_size",
+			FT_UINT16, BASE_DEC,
+			NULL, 0x0,
+			NULL, HFILL }
+		}
