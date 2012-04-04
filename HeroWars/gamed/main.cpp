@@ -31,6 +31,7 @@ typedef unsigned int uint32;
 typedef unsigned long long uint64; 
 
 
+
 ENetHost *server;
 enum LolPacketId : uint8
 {
@@ -45,10 +46,17 @@ enum LolPacketId : uint8
 	PKT_SpawnType = 0x65,
 };
 
+
 typedef struct _ClientInfo
 {
+	_ClientInfo()
+	{
+		keyChecked = false;
+	}
+	bool keyChecked;
 	uint64 userId;
 } ClientInfo;
+#define peerInfo(p) ((ClientInfo*)p->data)
 
 #pragma pack(push, 1) //byte-aligned
 typedef struct _PacketHeader
@@ -243,8 +251,7 @@ bool handleKeyCheck(ENetPeer *peer, ENetPacket *packet)
 	if(userId == keyCheck->userId)
 	{
 		printf(" User got the same key as i do, go on!\n");
-		peer->data = new ClientInfo();
-		((ClientInfo*)peer->data)->userId = userId;
+		peerInfo(peer)->keyChecked = true;
 	}
 	else
 	{
@@ -343,15 +350,12 @@ bool handleVersion(ENetPeer *peer, ENetPacket *packet)
 	return true;
 }
 
-bool firstPacket = false;
 bool handlePacket(ENetPeer *peer, ENetPacket *packet)
 {
 	if(packet->dataLength >= 8)
 	{
-		if(firstPacket)
+		if(peerInfo(peer)->keyChecked)
 			blowfish->Decrypt(packet->data, packet->dataLength-(packet->dataLength%8)); //Encrypt everything minus the last bytes that overflow the 8 byte boundary
-		else
-			firstPacket = true;
 	}
 
 	PacketHeader *header = (PacketHeader*)packet->data;
@@ -422,7 +426,7 @@ int main (int argc, char ** argv)
 					event.peer -> address.port);
 
 				/* Store any relevant client information here. */
-				event.peer -> data = "Client information";
+				event.peer->data = new ClientInfo();
 
 				break;
 
@@ -435,11 +439,10 @@ int main (int argc, char ** argv)
 				break;
 
 			case ENET_EVENT_TYPE_DISCONNECT:
-				printf ("%s disconected.\n", event.peer -> data);
+				printf ("Peer disconected.\n");
 
 				/* Reset the peer's client information. */
-
-				event.peer -> data = NULL;
+				delete event.peer->data;
 			}
 		}
 	}
