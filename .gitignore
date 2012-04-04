@@ -8,6 +8,8 @@
 *.obj
 *.so
 *.pdb
+*.lib
+*.exp
 
 # Packages #
 ############
