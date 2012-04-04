@@ -21,7 +21,17 @@
 #include "MemoryManager.h"
 
 unsigned char enet_host_service_pattern[] = {0x8B,0xD8,0x83,0xC4,0x0C,0x83,0xFB,0xFE};// just after we call enet_host_service
-unsigned char decrypt_packet_pattern[] = {0x8B,0x52,0x0C,0x52,0x51,0x50}; // just before we decrypt the packet
+unsigned char decrypt_packet_pattern[] = {0x8B,0x52,0x0C,0x52,0x51,0x50}; // just after we decrypt the packet
+unsigned char encrypt_packet_pattern[] = {0x8B,0x53,0x0C,0x83,0xC4,0x0C,0x57};
+
+FILE* logFile; //Where every packets whil be logs
+unsigned int packetCount; //Global variable that store how much have been logs, hope it won't overflow onde day :p
+
+typedef enum 
+{
+	PT_SERVER_TO_CLIENT,
+	PT_CLIENT_TO_SERVER
+} PACKET_TYPE;
 
 /*
 006FC94A   . 8B52 0C        MOV EDX,DWORD PTR DS:[EDX+C]
@@ -101,7 +111,7 @@ void __stdcall OnReceivePacket(ENetPacket* packet)
 	for(unsigned int i=0; i < packet->dataLength; ++i)
 	{
 		printf("%02x ",packet->data[i]);
-	}			
+	}
 
 	printf("\nASCII : ");
 	for(unsigned int i=0; i < packet->dataLength; ++i)
@@ -109,6 +119,17 @@ void __stdcall OnReceivePacket(ENetPacket* packet)
 		if(isalnum(packet->data[i]))
 			printf("%c",packet->data[i]);				
 	}
+
+	SYSTEMTIME time = {0};
+	GetSystemTime(&time);
+	
+	PACKET_TYPE type = PT_SERVER_TO_CLIENT; //fwrite is gay for writing constante values
+	fwrite(&type, sizeof(PACKET_TYPE),1,logFile);
+	fwrite(&time,sizeof(SYSTEMTIME),1,logFile);
+	fwrite(&packet->dataLength, sizeof(size_t),1,logFile);
+	fwrite(packet->data,packet->dataLength,1,logFile);
+
+	packetCount++;
 }
 
 Naked void ASMOnReceivePacket() 
@@ -117,40 +138,116 @@ Naked void ASMOnReceivePacket()
 	{
 		PUSH DWORD PTR [ESP + 0x30]
 		CALL OnReceivePacket
-			RET
+		RET
 	}
+}
+
+void __stdcall OnSendPacket(unsigned char* data, unsigned int length)
+{
+	printf ("\n[Sended : %d], DATA : ",length);	
+	for(unsigned int i = 0 ; i < length; ++i)
+	{
+		printf("%02x ",data[i]);
+	}
+
+	printf("\nASCII : ");
+	for(unsigned int i = 0 ; i < length; ++i)
+	{
+		if(isalnum(data[i]))
+			printf("%c",data[i]);				
+	}
+
+	SYSTEMTIME time = {0};
+	GetSystemTime(&time);
+	
+	PACKET_TYPE type = PT_CLIENT_TO_SERVER; //fwrite is gay for writing constante values
+	fwrite(&type, sizeof(PACKET_TYPE),1,logFile);
+	fwrite(&time,sizeof(SYSTEMTIME),1,logFile);
+	fwrite(&length, sizeof(size_t),1,logFile);
+	fwrite(data,length,1,logFile);
+
+	packetCount++;
+}
+
+Naked void ASMOnSendPacket()
+{
+	 __asm
+	 {
+		 PUSH EDI
+		 PUSH EAX
+		 CALL OnSendPacket		 
+		 MOV EDX, [EBX + 0x0C]
+		 ADD ESP, 0x10
+		 JMP DWORD PTR [ESP - 0x10]
+	 }
 }
 
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {	
 	if(fdwReason == DLL_PROCESS_ATTACH)
-	{		
-		AllocConsole();
-		SetConsoleTitleA( "LOL Proxy" );
-		FILE* console;
-		freopen_s(&console, "CONOUT$", "wb", stdout);
-		freopen_s(&console, "CONOUT$", "wb", stderr);		
-		printf("Attached");	
+	{
+			AllocConsole();
+			SetConsoleTitleA( "LOL Proxy" );
+			FILE* console;
+			freopen_s(&console, "CONOUT$", "wb", stdout);
+			freopen_s(&console, "CONOUT$", "wb", stderr);		
+			printf("Attached");
+			
+			char logFileName[50] = {0};
+			SYSTEMTIME time = {0};
+			GetSystemTime(&time);
 
-		char execname[MAX_PATH];
-		GetModuleFileNameA(NULL,execname,MAX_PATH);
-		printf("Executable path: %s\n",execname);
+			sprintf_s(logFileName,"packets logs %d-%d-%d_%d-%d-%d.pkt",time.wDay,time.wMonth,time.wYear,time.wHour,time.wMinute,time.wSecond);
+			printf("Packets logged in %s",logFileName);
 
-		MemoryManager::MemorySection section = MemoryManager::SearchSection(execname, ".text");
-		printf(".text section : adress %p, end %p\n",section.adress,section.adress + section.length);
+			if(fopen_s(&logFile,logFileName,"wb"))
+			{
+				printf("Unable to open %s to log packets",logFileName);
+				return 1;
+			}
+			
+			fwrite(&packetCount,sizeof(packetCount),1,logFile);
 
-		unsigned char* adress = MemoryManager::SearchCodeAdress(section,decrypt_packet_pattern,
-			sizeof(decrypt_packet_pattern));
+			char execname[MAX_PATH];
+			GetModuleFileNameA(NULL,execname,MAX_PATH);
 
-		if(adress)
-		{
-			printf("decrypt_packet_pattern found at %p\n",adress + 0xB); //0x006FC955
-			MemoryManager::ApplyCallHook(reinterpret_cast<unsigned char*>(adress + 0xB),reinterpret_cast<unsigned char*>(ASMOnReceivePacket));
-		}
-		else
-		{
-			printf("decrypt_packet_pattern not found");
-		}
+			printf("Executable path: %s\n",execname);
+			MemoryManager::MemorySection section = MemoryManager::SearchSection(execname, ".text");
+			printf(".text section : adress %p, end %p\n",section.adress,section.adress + section.length);
+
+			unsigned char* adress = MemoryManager::SearchCodeAdress(section,decrypt_packet_pattern,
+				sizeof(decrypt_packet_pattern));
+
+			if(adress)
+			{
+				printf("decrypt_packet_pattern found at %p\n",adress + 0xB); //0x006FC955
+				MemoryManager::ApplyCallHook(reinterpret_cast<unsigned char*>(adress + 0xB),reinterpret_cast<unsigned char*>(ASMOnReceivePacket));
+			}
+			else
+			{
+				printf("decrypt_packet_pattern not found");
+			}
+
+			adress = MemoryManager::SearchCodeAdress(section,encrypt_packet_pattern,
+				sizeof(encrypt_packet_pattern));
+			if(adress)
+			{
+				printf("encrypt_packet_pattern found at %p\n",adress); //0x006FC955
+				MemoryManager::ApplyCallHook(reinterpret_cast<unsigned char*>(adress),reinterpret_cast<unsigned char*>(ASMOnSendPacket),1);
+			}
+			else
+			{
+				printf("encrypt_packet_pattern not found");
+			}	
+	}
+	else if(fdwReason == DLL_PROCESS_DETACH)
+	{
+			if(logFile) {				
+				fseek(logFile,0,SEEK_SET);
+				fwrite(&packetCount,sizeof(packetCount),1,logFile);
+				fclose(logFile);
+			}
+	FreeConsole();
 	}
 
 	return TRUE;
