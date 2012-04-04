@@ -5,6 +5,7 @@
 *.dll
 *.exe
 *.o
+*.obj
 *.so
 *.pdb
 
@@ -34,9 +35,16 @@ ehthumbs.db
 Icon?
 Thumbs.db
 
-# Custom #
+# Visual studio #
 ##########
+Debug
+Release
 *_Debug
+*_Release
 *.user
 *.suo
 *.ncb
+*.webinfo
+
+# Subversion data folders
+.svn/
