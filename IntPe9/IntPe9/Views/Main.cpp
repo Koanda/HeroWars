@@ -1,5 +1,4 @@
 #include "Main.h"
-#include "IntPe.h"
 
 MainGui::MainGui(QWidget *parent, Qt::WFlags flags)
 	: QMainWindow(parent, flags)
