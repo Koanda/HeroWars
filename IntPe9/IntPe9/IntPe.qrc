@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/Common">
+    <file>Resources/send.gif</file>
+    <file>Resources/recv.gif</file>
+    <file>Resources/16ico.png</file>
+    <file>Resources/logo.png</file>
+  </qresource>
+</RCC>
