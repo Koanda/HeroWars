@@ -1,2 +1,2 @@
 cd "C:\Program Files (x86)\League of Legends\RADS\solutions\lol_game_client_sln\releases\0.0.0.134\deploy"
-"League of Legends.exe" "8390" "lol.launcher.exe" "Air\LOLClient.exe" "127.0.0.1 5109 BQ/rlw1ivzbg7IG/6/iXRQ== 24169346"
+"League of Legends.exe" "8390" "lol.launcher.exe" "Air\LOLClient.exe" "127.0.0.1 5109 ODlks70+e2SYHI2doO6LKw== 24169346"
