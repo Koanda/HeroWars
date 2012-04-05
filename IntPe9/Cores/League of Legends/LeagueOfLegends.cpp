@@ -73,19 +73,14 @@ uint8 *reassemblePacket(ENetProtocol *command, uint32 length, uint32 *dataLength
 		MessagePacket *packet = (MessagePacket*)new uint8[totalLength+sizeof(MessagePacket)];
 		packet->length = totalLength;
 		reassemble[startSequenceNumber] = packet;	
-		leagueOfLegends->DbgPrint("First fragment");
 	}
 
 	MessagePacket *packet = reassemble[startSequenceNumber];
 	memcpy(&packet->getData()[fragmentOffset], (uint8*)command+sizeof(ENetProtocolSendFragment), fragmentLength);
-	leagueOfLegends->DbgPrint("Copy fragment memory");
 
 	//If reassembled, return data, else NULL
 	if(fragmentNumber == fragmentCount-1)
-	{
-		leagueOfLegends->DbgPrint("Return fixed fragment memory");
 		return (uint8*)packet;
-	}
 	else
 		return NULL;
 }
@@ -110,7 +105,24 @@ uint8 *parseEnet(char *buffer, uint32 length, uint32 *dataLength, bool *isFragme
 
 	uint8 cmd = command->header.command & ENET_PROTOCOL_COMMAND_MASK;
 
-	leagueOfLegends->DbgPrint("Parse, cmd: %i, channel: %i, size: %i", cmd, command->header.channelID, length);
+	if((cmd == ENET_PROTOCOL_COMMAND_SEND_RELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED))
+	{
+		uint32 maLen = 0;
+		switch (cmd)
+		{
+			case ENET_PROTOCOL_COMMAND_SEND_RELIABLE:
+				maLen = ENET_NET_TO_HOST_16(command->sendReliable.dataLength);
+				break;
+			case ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE:
+				maLen = ENET_NET_TO_HOST_16(command->sendUnreliable.dataLength);
+				break;
+			case ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED:
+				maLen = ENET_NET_TO_HOST_16(command->sendUnsequenced.dataLength);
+				break;
+		}
+
+		leagueOfLegends->DbgPrint("[RECV] Parse, cmd: %i, channel: %i, size: %i", cmd, command->header.channelID, maLen);
+	}
 
 	switch (command->header.command & ENET_PROTOCOL_COMMAND_MASK)
 	{
@@ -160,6 +172,8 @@ int WSAAPI newWSASendTo(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount, LPDWO
 			//Skip if not a data packet
 			if(!(cmd == ENET_PROTOCOL_COMMAND_SEND_RELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED))
 				continue;
+
+			leagueOfLegends->DbgPrint("[SEND] Parse, cmd: %i, channel: %i, size: %i", cmd, command->header.channelID, lpBuffers[i+1].len);
 		
 			sendBuf->type = WSASENDTO;
 			sendBuf->length = lpBuffers[i+1].len;
