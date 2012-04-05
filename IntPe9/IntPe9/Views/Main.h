@@ -8,6 +8,7 @@
 #include "ui_Main.h"
 #include "About.h"
 #include "Injector.h"
+#include "QHexEdit/qhexedit.h"
 
 class MainGui : public QMainWindow
 {
@@ -26,6 +27,7 @@ public:
 
 private:
 	//Views
+	QHexEdit *_hexView;
 	AboutGui *_aboutGui;
 	Ui::mainView _mainView;
 	Injector *_injector;

@@ -25,8 +25,6 @@ public:
 	QVariant data(const QModelIndex &index, int role) const;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const;
 	Packet *getPacketAt(int index);
-	void addPacket(RawPacket *data);
-
 private:
 	bool _running;
 	QVector<Packet*> _packets;

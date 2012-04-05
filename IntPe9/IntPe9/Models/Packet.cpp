@@ -1,69 +1,38 @@
 #include "Packet.h"
 
 #define SUMMARY_LEN 18
-Packet::Packet(MessagePacket *data, QObject *parent /* = 0 */) : QAbstractListModel(parent)
+
+Packet::Packet(MessagePacket *data)
 {
 	try
 	{	
-	uint32 max;
-	QString temp;
-	QChar character;
+		//Copy data
+		_lenght = data->length;
+		_type = data->type;
+		_data = new QByteArray((const char*)data->getData(), data->length);
 
-	//Copy data
-	_lenght = data->length;
-	_type = data->type;
-
-	//Create list view data
-	for(uint8 i = 0; i < ((_lenght > SUMMARY_LEN) ? SUMMARY_LEN : _lenght); i++)
-	{
-		temp.sprintf("%02X ", (uint8)data->getData()[i]);
-		_summary.append(temp);
-	}
-	if(_lenght > SUMMARY_LEN)
-	{
-		temp.sprintf("... %02X %02X", (uint8)data->getData()[_lenght-2], (uint8)data->getData()[_lenght-1]);
-		_summary.append(temp);
-	}
-
-	//Create detail data
-	for(uint16 i = 0; i < _lenght; i += 16)
-	{
-		//Line numbers
-		temp.sprintf("%06i    \n", i);
-		_dLine.append(temp);
-
-		//Hex and Ascii view
-		max = (i + 16 > _lenght) ? i + (_lenght % 16) : i + 16;
-		if(i == 0 && max == 0)
-			max = _lenght;
-		for(uint16 j = i; j < max; j++)
+		//Create list view data
+		QString temp;
+		for(uint8 i = 0; i < ((_lenght > SUMMARY_LEN) ? SUMMARY_LEN : _lenght); i++)
 		{
-			//Hex
-			temp.sprintf("%02X ", (uint8)data->getData()[j]);
-			_dHex.append(temp);
-
-			//Ascii
-			character = isprint(data->getData()[j]) ? data->getData()[j] : '.';
-			_dAscii.append(character);
+			temp.sprintf("%02X ", (uint8)data->getData()[i]);
+			_summary.append(temp);
 		}
-
-
-		//Line break
-		_dHex.append("   \n");
-		_dAscii.append("\n");
-	}
+		if(_lenght > SUMMARY_LEN)
+		{
+			temp.sprintf("... %02X %02X", (uint8)data->getData()[_lenght-2], (uint8)data->getData()[_lenght-1]);
+			_summary.append(temp);
+		}
 	}
 	catch(...)
 	{
 
 	}
-	//Let the core clean it up (for now perhaps later to improve this)
-	//free((char*)data);
 }
 
 Packet::~Packet()
 {
-
+	delete _data;
 }
 
 QVariant Packet::getField(int column)
@@ -78,52 +47,6 @@ QVariant Packet::getField(int column)
 			return getBody();
 		default:
 			return QVariant();
-	}
-}
-
-int Packet::columnCount(const QModelIndex &parent) const
-{
-	return 3;
-}
-
-int Packet::rowCount(const QModelIndex &parent) const
-{
-	return 1;
-}
-
-QVariant Packet::data(const QModelIndex &index, int role) const
-{
-	if (!index.isValid() || index.row() > 1 || index.column() > 2 || (role != Qt::DisplayRole) )
-		return QVariant();
-
-	switch(index.column())
-	{
-		case 0:
-			return _dLine;
-		case 1:
-			return _dHex;
-		case 2:
-			return _dAscii;
-		default:
-			return QVariant();
-	}
-}
-
-QVariant Packet::headerData(int section, Qt::Orientation orientation, int role) const
-{
-	if (role != Qt::DisplayRole || orientation != Qt::Horizontal)
-		return QVariant();
-
-	switch(section)
-	{
-	case 0:
-		return QString("Offset");
-	case 1:
-		return QString("Hex");
-	case 2:
-		return QString("Ascii");
-	default:
-		return QVariant();
 	}
 }
 
@@ -147,4 +70,9 @@ QVariant Packet::getSize()
 QVariant Packet::getBody()
 {
 	return _summary;
+}
+
+QByteArray *Packet::getData()
+{
+	return _data;
 }

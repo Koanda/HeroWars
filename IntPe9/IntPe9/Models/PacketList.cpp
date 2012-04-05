@@ -40,12 +40,6 @@ void PacketList::packetPoll()
 	delete[] recvPacket;
 }
 
-void PacketList::addPacket(RawPacket *data)
-{
-	_packets.push_back(new Packet(data));
-	layoutChanged();
-}
-
 Packet *PacketList::getPacketAt(int index)
 {
 	if(index < 0 && index >= _packets.count())
