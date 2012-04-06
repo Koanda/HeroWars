@@ -19,14 +19,18 @@ public:
 	//Custom stuff
 	QVariant getField(int column);
 	QPixmap getIcon();
-	QVariant getSize();
 	QVariant getBody();
 
+	uint32 getLength();
+	PacketType getType();
 	QByteArray *getData();
+
+	QString strInfoHeader();
+	QString strFullDump();
 
 private:
 	//Data
-	uint32 _lenght;
+	uint32 _length;
 	PacketType _type;
 	QByteArray *_data;
 

@@ -7,20 +7,20 @@ Packet::Packet(MessagePacket *data)
 	try
 	{	
 		//Copy data
-		_lenght = data->length;
+		_length = data->length;
 		_type = data->type;
 		_data = new QByteArray((const char*)data->getData(), data->length);
 
 		//Create list view data
 		QString temp;
-		for(uint8 i = 0; i < ((_lenght > SUMMARY_LEN) ? SUMMARY_LEN : _lenght); i++)
+		for(uint8 i = 0; i < ((_length > SUMMARY_LEN) ? SUMMARY_LEN : _length); i++)
 		{
 			temp.sprintf("%02X ", (uint8)data->getData()[i]);
 			_summary.append(temp);
 		}
-		if(_lenght > SUMMARY_LEN)
+		if(_length > SUMMARY_LEN)
 		{
-			temp.sprintf("... %02X %02X", (uint8)data->getData()[_lenght-2], (uint8)data->getData()[_lenght-1]);
+			temp.sprintf("... %02X %02X", (uint8)data->getData()[_length-2], (uint8)data->getData()[_length-1]);
 			_summary.append(temp);
 		}
 	}
@@ -35,6 +35,50 @@ Packet::~Packet()
 	delete _data;
 }
 
+QString Packet::strInfoHeader()
+{
+	QString out;
+	out += "Packet: ";
+		if(_type == WSASENDTO || _type == WSASEND)
+			out += "Client -> Server";
+		else
+			out += "Server -> Client";
+
+	out += ", Length: " + QString::number(_length) + "\n"; 
+
+	return out;
+}
+
+QString Packet::strFullDump()
+{
+	QString out;
+	QString format;
+	for(uint32 s = 0, x = 0, c = 0; s < _length; s+=16)
+	{
+		//Format line number
+		out += format.sprintf("%08x     ", s);
+
+		//Format hex
+		for(x = s, c = 0; x < _length && c < 16; x++, c++)
+			out += format.sprintf("%02X ", (uint8)_data->at(x));
+
+		//Pad remaining space
+		for(; c < 16; c++)
+			out += "   ";
+		out += "    "; 
+
+		//Format ascii
+		for(x = s, c = 0; x < _length && c < 16; x++, c++)
+			out += (QChar(_data->at(x)).isLetterOrNumber() ? QChar(_data->at(x)) : '.');
+		out += "\n";
+
+		//Break if we are done
+		if(s+c >= _length)
+			break;
+	}
+	return out;
+}
+
 QVariant Packet::getField(int column)
 {
 	switch(column)
@@ -42,7 +86,7 @@ QVariant Packet::getField(int column)
 		case 0:
 			return getIcon();
 		case 1:
-			return getSize();
+			return getLength();
 		case 2:
 			return getBody();
 		default:
@@ -62,14 +106,19 @@ QPixmap Packet::getIcon()
 		return QPixmap();
 }	
 
-QVariant Packet::getSize()
-{
-	return _lenght;
-}
-
 QVariant Packet::getBody()
 {
 	return _summary;
+}
+
+PacketType Packet::getType()
+{
+	return _type;
+}
+
+uint32 Packet::getLength()
+{
+	return _length;
 }
 
 QByteArray *Packet::getData()

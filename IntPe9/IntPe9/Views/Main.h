@@ -4,6 +4,9 @@
 #include <QMessageBox>
 #include <QtGui/QMainWindow>
 #include <QStyledItemDelegate>
+#include <QFile>
+
+
 #include "Models/PacketList.h"
 #include "ui_Main.h"
 #include "About.h"
@@ -21,6 +24,7 @@ public:
 	Ui::mainView* getView();
 
 	public slots:
+		void saveAllAsText();
 		void slotOnClickPacketList(const QModelIndex &current, const QModelIndex &previous);
 		void slotShow();
 		void slotHide();

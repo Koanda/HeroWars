@@ -168,6 +168,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSavePackets"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="tearOffEnabled">
@@ -203,6 +204,11 @@
   <action name="actionOpcodes">
    <property name="text">
     <string>Opcodes</string>
+   </property>
+  </action>
+  <action name="actionSavePackets">
+   <property name="text">
+    <string>Save all packets</string>
    </property>
   </action>
  </widget>
