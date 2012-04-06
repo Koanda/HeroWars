@@ -11,7 +11,6 @@ typedef struct _PacketHeader
 {
 	_PacketHeader()
 	{
-		cmd = PKT_Unknown;
 		type = 0;
 		unk1 = 0;
 	}

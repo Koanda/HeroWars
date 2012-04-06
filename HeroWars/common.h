@@ -14,8 +14,8 @@ typedef unsigned long long uint64;
 
 enum PacketCmd : uint8
 {
-	PKT_Unknown = 0xFF,
 	PKT_KeyCheck = 0x00,
+	
 	PKT_S2C_QueryStatusAns = 0x8e,
 	PKT_World_SendGameNumber = 0x99,
 	PKT_C2S_QueryStatusReq = 0x17,
@@ -26,6 +26,9 @@ enum PacketCmd : uint8
 	PKT_C2S_GameNumberReq = 0xA5,
 	PKT_C2S_Ping_Load_Info = 0x19,
 	PKT_S2C_Ping_Load_Info = 0x9E,
+
+
+
 	PKT_SpawnStart = 0x67,
 	PKT_SpawnName = 0x66,
 	PKT_SpawnType = 0x65,

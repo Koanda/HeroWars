@@ -39,7 +39,7 @@ QByteArray & XByteArray::data()
 void XByteArray::setData(QByteArray data)
 {
     _data = data;
-    _changedData = QByteArray(data.length(), char(0));
+    //_changedData = QByteArray(data.length(), char(0));
 }
 
 bool XByteArray::dataChanged(int i)
