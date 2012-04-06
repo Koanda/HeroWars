@@ -43,6 +43,7 @@ void LogFile::load(const QString& path)
         p.data = file.read(length);
         m_packets.append(p);
     }
+    file.close();
 }
 
 void LogFile::reload()

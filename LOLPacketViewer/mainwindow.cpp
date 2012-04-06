@@ -92,7 +92,7 @@ void MainWindow::on_packetsTreeView_selectionChanged ( const QItemSelection & se
         data += QString("%1     ").arg(i * 16, 4, 16,QChar('0'));
         for (int j = 0; j < 16 ; ++j)
         {
-            data += QString("%1 ").arg((unsigned char)p.data.at(i * 16 + j),2,16,QChar('0'));
+            data += QString("%1 ").arg(static_cast<unsigned char>(p.data.at(i * 16 + j)),2,16,QChar('0'));
         }
 
         data += "       ";
@@ -118,7 +118,7 @@ void MainWindow::on_packetsTreeView_selectionChanged ( const QItemSelection & se
         data += QString("%1     ").arg(row * 16, 4, 16,QChar('0'));
         for (int i = 0; i < rest ; ++i)
         {
-            data += QString("%1 ").arg((unsigned char)p.data.at(row*16 + i),2,16,QChar('0'));
+            data += QString("%1 ").arg(static_cast<unsigned char>(p.data.at(row*16 + i)),2,16,QChar('0'));
             if (i % 2 == 1)
             {
                 data += " ";

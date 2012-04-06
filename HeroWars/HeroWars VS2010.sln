@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gamed", "VS2008\gamed.vcxproj", "{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "enet-1.2.5", "VS2008\enet-1.2.5.vcxproj", "{AA18CE3F-30E5-49FF-971C-6715A70786A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "intlib", "VS2008\intlib.vcxproj", "{253D40B4-8B15-44D1-A718-C4035A31E5DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}.Debug|Win32.Build.0 = Debug|Win32
+		{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}.Release|Win32.ActiveCfg = Release|Win32
+		{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}.Release|Win32.Build.0 = Release|Win32
+		{AA18CE3F-30E5-49FF-971C-6715A70786A8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AA18CE3F-30E5-49FF-971C-6715A70786A8}.Debug|Win32.Build.0 = Debug|Win32
+		{AA18CE3F-30E5-49FF-971C-6715A70786A8}.Release|Win32.ActiveCfg = Release|Win32
+		{AA18CE3F-30E5-49FF-971C-6715A70786A8}.Release|Win32.Build.0 = Release|Win32
+		{253D40B4-8B15-44D1-A718-C4035A31E5DE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{253D40B4-8B15-44D1-A718-C4035A31E5DE}.Debug|Win32.Build.0 = Debug|Win32
+		{253D40B4-8B15-44D1-A718-C4035A31E5DE}.Release|Win32.ActiveCfg = Release|Win32
+		{253D40B4-8B15-44D1-A718-C4035A31E5DE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
