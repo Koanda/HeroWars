@@ -83,7 +83,7 @@ typedef struct _KeyCheck
 
 	uint8 *pCheckId()
 	{
-		return (uint8*)((uint64*)&checkId);
+		return reinterpret_cast<uint8*>((reinterpret_cast<uint64*>(&checkId)));
 	}
 } KeyCheck;
 

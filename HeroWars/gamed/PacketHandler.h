@@ -2,7 +2,7 @@
 #define _PACKET_HANDLER_H
 #include "common.h"
 #include "Packets.h"
-
+#include "Log.h"
 #include <enet/enet.h>
 #include <intlib/base64.h>
 #include <intlib/blowfish.h>

@@ -1,4 +1,5 @@
 #include "NetworkListener.h"
+#include "Log.h"
 
 NetworkListener::NetworkListener()
 {
@@ -42,7 +43,7 @@ void NetworkListener::netLoop()
 		switch (event.type)
 		{
 			case ENET_EVENT_TYPE_CONNECT:
-				printf("A new client connected connected\n");
+				Log::getMainInstance()->writeLine("A new client connected connected\n");
 
 				/* Set some defaults */
 				event.peer->mtu = PEER_MTU;
@@ -58,7 +59,7 @@ void NetworkListener::netLoop()
 		break;
 
 		case ENET_EVENT_TYPE_DISCONNECT:
-			printf ("Peer disconnected.\n");
+			Log::getMainInstance()->writeLine("Peer disconnected.\n");
 
 			/* Cleanup */
 			delete event.peer->data;

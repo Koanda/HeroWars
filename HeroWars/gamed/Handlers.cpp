@@ -315,13 +315,13 @@ bool PacketHandler::handleKeyCheck(ENetPeer *peer, ENetPacket *packet)
 	uint64 userId = _blowfish->Decrypt(keyCheck->checkId);
 	if(userId == keyCheck->userId)
 	{
-		printf(" User got the same key as i do, go on!\n");
+		PDEBUG_LOG_LINE(Log::getMainInstance()," User got the same key as i do, go on!\n");
 		peerInfo(peer)->keyChecked = true;
 		peerInfo(peer)->userId = userId;
 	}
 	else
 	{
-		printf(" WRONG KEY, GTFO!!!\n");
+		Log::getMainInstance()->errorLine(" WRONG KEY, GTFO!!!\n");
 		return false;
 	}
 
@@ -339,7 +339,7 @@ bool PacketHandler::handleKeyCheck(ENetPeer *peer, ENetPacket *packet)
 	response.header.unk1 = 0xFFFF;
 	//response.unk1 = 1;
 	
-	return sendPacket(peer, (uint8*)&response, sizeof(KeyCheck), 0); //channel 0 check
+	return sendPacket(peer, reinterpret_cast<uint8*>(&response), sizeof(KeyCheck), 0); //channel 0 check
 }
 
 bool PacketHandler::handleGameNumber(ENetPeer *peer, ENetPacket *packet)
@@ -348,19 +348,19 @@ bool PacketHandler::handleGameNumber(ENetPeer *peer, ENetPacket *packet)
 	world.gameId = 1;
 	memcpy(world.data, "IMxTroll", 8);
 
-	return sendPacket(peer, (uint8*)&world, sizeof(WorldSendGameNumber), 3); //channel 3 check
+	return sendPacket(peer, reinterpret_cast<uint8*>(&world), sizeof(WorldSendGameNumber), 3); //channel 3 check
 }
 
 bool PacketHandler::handleSynch(ENetPeer *peer, ENetPacket *packet)
 {
-	SynchVersion *version = (SynchVersion*)packet->data;
-	printf("Client version: %s\n", version->version);
-	return sendPacket(peer, (uint8*)init, sizeof(init), 3); //channel 3 check
+	SynchVersion *version = reinterpret_cast<SynchVersion*>(packet->data);
+	Log::getMainInstance()->writeLine("Client version: %s\n", version->version);
+	return sendPacket(peer, reinterpret_cast<uint8*>(init), sizeof(init), 3); //channel 3 check
 }
 
 bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)
 {
-	return sendPacket(peer, (uint8*)spawnStart, sizeof(spawnStart), 6);
+	return sendPacket(peer, reinterpret_cast<uint8*>(spawnStart), sizeof(spawnStart), 6);
 }
 
 bool PacketHandler::handleSpawn(ENetPeer *peer, ENetPacket *packet)
@@ -375,11 +375,11 @@ bool PacketHandler::handleSpawn(ENetPeer *peer, ENetPacket *packet)
 	SpawnPacket *spawnType = SpawnPacket::create(PKT_SpawnType, (uint8*)type, strlen(type));
 	spawnType->userId = peerInfo(peer)->userId;
 
-	printf("Send 1\n");
+	PDEBUG_LOG_LINE(Log::getMainInstance(),"Send 1\n");
 	sendPacket(peer, (uint8*)spawnName, spawnName->getPacketLength(), 3);
 	
 	enet_host_flush(_server);
-	printf("Send 2\n");
+	PDEBUG_LOG_LINE(Log::getMainInstance(),"Send 2\n");
 	sendPacket(peer, (uint8*)spawnType, spawnType->getPacketLength(), 3);
 	enet_host_flush(_server);
 
@@ -388,7 +388,7 @@ bool PacketHandler::handleSpawn(ENetPeer *peer, ENetPacket *packet)
 
 bool PacketHandler::handleLoadPing(ENetPeer *peer, ENetPacket *packet)
 {
-	PingLoadInfo *loadInfo = (PingLoadInfo*)packet->data;
+	PingLoadInfo *loadInfo = reinterpret_cast<PingLoadInfo*>(packet->data);
 
 	PingLoadInfo response;
 	memcpy(&response, packet->data, sizeof(PingLoadInfo));
@@ -396,7 +396,7 @@ bool PacketHandler::handleLoadPing(ENetPeer *peer, ENetPacket *packet)
 	response.userId = peerInfo(peer)->userId;
 
 
-	printf("Loading: loadeded: %f, ping: %f, %i, %f\n", loadInfo->loaded, loadInfo->ping, loadInfo->unk4, loadInfo->f3);
+	Log::getMainInstance()->writeLine("Loading: loadeded: %f, ping: %f, %i, %f\n", loadInfo->loaded, loadInfo->ping, loadInfo->unk4, loadInfo->f3);
 
 	//response.loaded = 50.0;
 	//response.ping = 10.0;
@@ -405,11 +405,11 @@ bool PacketHandler::handleLoadPing(ENetPeer *peer, ENetPacket *packet)
 	//Should be of course broadcast
 	
 	//sendPacket(peer, 4, (uint8*)&response, sizeof(PingLoadInfo), UNRELIABLE);
-	return broadcastPacket((uint8*)&response, sizeof(PingLoadInfo), 4, 0);
+	return broadcastPacket(reinterpret_cast<uint8*>(&response), sizeof(PingLoadInfo), 4, 0);
 }
 
 bool PacketHandler::handleQueryStatus(HANDLE_ARGS)
 {
 	QueryStatus response;
-	return sendPacket(peer, (uint8*)&response, sizeof(QueryStatus), 3);
+	return sendPacket(peer, reinterpret_cast<uint8*>(&response), sizeof(QueryStatus), 3);
 }

@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <stdio.h>
 #include "NetworkListener.h"
+#include "Log.h"
 
 #define SERVER_HOST ENET_HOST_ANY 
 #define SERVER_PORT 5109
@@ -27,17 +28,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main (int argc, char ** argv) 
 {
-	printf("HeroWars %s\n", SERVER_VERSION);
-
+	Log::getMainInstance()->writeLine("HeroWars %s\n",SERVER_VERSION);
 	NetworkListener *listener = new NetworkListener();
 	ENetAddress address;
 	address.host = SERVER_HOST;
 	address.port = SERVER_PORT;
 
 	listener->initialize(&address, SERVER_KEY);
-	printf("Starting netloop\n");
+	Log::getMainInstance()->writeLine("Starting netloop\n");
 	listener->netLoop();
 	delete listener;
 
-	printf("Goodbye");
+	Log::getMainInstance()->writeLine("Goodbye\n");
 }

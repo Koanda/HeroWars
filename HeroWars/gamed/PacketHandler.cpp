@@ -31,26 +31,26 @@ PacketHandler::~PacketHandler()
 
 void PacketHandler::printPacket(uint8 *buf, uint32 len)
 {
-	printf("   ");
+	PDEBUG_LOG(Log::getMainInstance(),"   ");
 	for(uint32 i = 0; i < len; i++)
 	{
-		printf("%02X ", (uint8)buf[i]);
+		PDEBUG_LOG(Log::getMainInstance(),"%02X ", static_cast<uint8>(buf[i]));
 		if((i+1)%16 == 0)
-			printf("\n   ");
+			PDEBUG_LOG(Log::getMainInstance(),"\n   ");
 	}
-	printf("\n");
+	PDEBUG_LOG(Log::getMainInstance(),"\n");
 }
 
 void PacketHandler::printLine(uint8 *buf, uint32 len)
 {
 	for(uint32 i = 0; i < len; i++)
-		printf("%02X ", (uint8)buf[i]);
-	printf("\n");
+		PDEBUG_LOG(Log::getMainInstance(),"%02X ", static_cast<uint8>(buf[i]));
+	PDEBUG_LOG(Log::getMainInstance(),"\n");
 }
 
 bool PacketHandler::sendPacket(ENetPeer *peer, uint8 *data, uint32 length, uint8 channelNo, uint32 flag)
 {
-	printf(" Sending packet:\n");
+	PDEBUG_LOG_LINE(Log::getMainInstance()," Sending packet:\n");
 	printPacket(data, length);
 
 	if(length >= 8)
@@ -59,7 +59,7 @@ bool PacketHandler::sendPacket(ENetPeer *peer, uint8 *data, uint32 length, uint8
 	ENetPacket *packet = enet_packet_create(data, length, flag);
 	if(enet_peer_send(peer, channelNo, packet) < 0)
 	{
-		printf("Warning fail, send!");
+		PDEBUG_LOG_LINE(Log::getMainInstance(),"Warning fail, send!");
 		return false;
 	}
 	return true;
@@ -67,7 +67,7 @@ bool PacketHandler::sendPacket(ENetPeer *peer, uint8 *data, uint32 length, uint8
 
 bool PacketHandler::broadcastPacket(uint8 *data, uint32 length, uint8 channelNo, uint32 flag)
 {
-	printf(" Broadcast packet:\n");
+	PDEBUG_LOG_LINE(Log::getMainInstance()," Broadcast packet:\n");
 	printPacket(data, length);
 
 	if(length >= 8)
@@ -87,7 +87,7 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 			_blowfish->Decrypt(packet->data, packet->dataLength-(packet->dataLength%8)); //Encrypt everything minus the last bytes that overflow the 8 byte boundary
 	}
 
-	PacketHeader *header = (PacketHeader*)packet->data;
+	PacketHeader *header = reinterpret_cast<PacketHeader*>(packet->data);
 
 	bool handled = false;
 	for(uint32 i = 0; i < TOTAL_HANDLERS; ++i)
@@ -96,7 +96,7 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 		{
 			if(!(*this.*table[i].handler)(peer, packet))
 			{
-				printf("Handler failed for: %i", header->cmd);
+				PDEBUG_LOG_LINE(Log::getMainInstance(),"Handler failed for: %i", header->cmd);
 				return false;
 			}
 			handled = true;
@@ -105,7 +105,7 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 
 	if(!handled)
 	{
-		printf("Unknown packet: %X(%i)\n", header->cmd, header->cmd);
+		PDEBUG_LOG_LINE(Log::getMainInstance(),"Unknown packet: %X(%i)\n", header->cmd, header->cmd);
 	}
 
 	return true;
