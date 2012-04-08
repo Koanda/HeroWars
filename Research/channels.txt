@@ -16,3 +16,19 @@ CMD 7
 CMD 9
 	S - C
 	4
+
+
+Channel 1 seam to be use for reconnect packets.
+***************************************
+
+push    1               ; int
+lea     edx, [esp+20h]
+push    18h             ; Size
+push    edx             ; Src
+call    sub_6F5590	<== here is the function that create the first packet : PKT_KeyCheck
+mov     ecx, [ebx+0Ch]
+add     esp, 0Ch
+push    0                 <=== here is the channel for the firts packet
+push    ecx
+mov     esi, eax
+call    enet_peer_send 
