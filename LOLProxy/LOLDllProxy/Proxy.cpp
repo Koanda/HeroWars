@@ -23,8 +23,11 @@
 unsigned char enet_host_service_pattern[] = {0x8B,0xD8,0x83,0xC4,0x0C,0x83,0xFB,0xFE};// just after we call enet_host_service
 unsigned char decrypt_packet_pattern[] = {0x8B,0x52,0x0C,0x52,0x51,0x50}; // just after we decrypt the packet
 unsigned char encrypt_packet_pattern[] = {0x8B,0x53,0x0C,0x83,0xC4,0x0C,0x57};
+unsigned char sendpacket[] = {0x55,0x8B,0xEC,0x83,0xE4,0xF8,0x51,0x8B,0x45,0x14,0x83,0xE8,0x00};
+
 
 FILE* logFile; //Where every packets whil be logs
+FILE* channelFile;
 unsigned int packetCount; //Global variable that store how much have been logs, hope it won't overflow onde day :p
 
 typedef enum 
@@ -121,8 +124,7 @@ void __stdcall OnReceivePacket(ENetPacket* packet)
 	}
 
 	SYSTEMTIME time = {0};
-	GetSystemTime(&time);
-	
+	GetSystemTime(&time);	
 	PACKET_TYPE type = PT_SERVER_TO_CLIENT; //fwrite is gay for writing constante values
 	fwrite(&type, sizeof(PACKET_TYPE),1,logFile);
 	fwrite(&time,sizeof(SYSTEMTIME),1,logFile);
@@ -142,8 +144,11 @@ Naked void ASMOnReceivePacket()
 	}
 }
 
-void __stdcall OnSendPacket(unsigned char* data, unsigned int length)
+void __stdcall OnSendPacket(unsigned char* data, unsigned int length, int channel)
 {
+	unsigned char cmd = data[0];
+	fprintf_s(channelFile,"cmd : %02x, channel : %02x\n",cmd,channel);
+
 	printf ("\n[Sended : %d], DATA : ",length);	
 	for(unsigned int i = 0 ; i < length; ++i)
 	{
@@ -173,12 +178,15 @@ Naked void ASMOnSendPacket()
 {
 	 __asm
 	 {
-		 PUSH EDI
-		 PUSH EAX
-		 CALL OnSendPacket		 
-		 MOV EDX, [EBX + 0x0C]
-		 ADD ESP, 0x10
-		 JMP DWORD PTR [ESP - 0x10]
+		 PUSHAD
+		 PUSH DWORD PTR [EBP + 0x10] //CHANNEL
+		 PUSH DWORD PTR [EBP + 0x8] //SIZE
+		 PUSH DWORD PTR [EBP + 0x0C] //DATA
+		 CALL OnSendPacket
+		 POPAD
+		 MOV EAX,DWORD PTR SS:[EBP + 0x14]
+         SUB EAX,0
+		 RET
 	 }
 }
 
@@ -206,6 +214,14 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 				return 1;
 			}
 			
+			sprintf_s(logFileName,"channels logs %d-%d-%d_%d-%d-%d.pkt",time.wDay,time.wMonth,time.wYear,time.wHour,time.wMinute,time.wSecond);
+			printf("Packets channel logged in %s",logFileName);
+			if(fopen_s(&channelFile,logFileName,"w"))
+			{
+				printf("Unable to open %s to log packets",logFileName);
+				return 1;
+			}
+
 			fwrite(&packetCount,sizeof(packetCount),1,logFile);
 
 			char execname[MAX_PATH];
@@ -228,12 +244,12 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 				printf("decrypt_packet_pattern not found");
 			}
 
-			adress = MemoryManager::SearchCodeAdress(section,encrypt_packet_pattern,
-				sizeof(encrypt_packet_pattern));
+			adress = MemoryManager::SearchCodeAdress(section,sendpacket,
+				sizeof(sendpacket));
 			if(adress)
 			{
-				printf("encrypt_packet_pattern found at %p\n",adress); //0x006FC955
-				MemoryManager::ApplyCallHook(reinterpret_cast<unsigned char*>(adress),reinterpret_cast<unsigned char*>(ASMOnSendPacket),1);
+				printf("sendpacket found at %p\n",adress + 0x7);
+				MemoryManager::ApplyCallHook(reinterpret_cast<unsigned char*>(adress + 0x7),reinterpret_cast<unsigned char*>(ASMOnSendPacket),1);
 			}
 			else
 			{
@@ -246,6 +262,11 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 				fseek(logFile,0,SEEK_SET);
 				fwrite(&packetCount,sizeof(packetCount),1,logFile);
 				fclose(logFile);
+			}
+
+			if(channelFile)
+			{
+				fclose(channelFile);
 			}
 	FreeConsole();
 	}
