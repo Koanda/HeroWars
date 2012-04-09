@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="Blowfish"
-	ProjectGUID="{BED17788-577B-455E-B3B9-1CB8639131EF}"
-	RootNamespace="Blowfish"
+	Name="General"
+	ProjectGUID="{86C13717-6E05-4AB8-A8EF-7BCD50BB4B34}"
+	RootNamespace="General"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory=".\General_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\General_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -79,8 +79,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory=".\General_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\General_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -144,11 +144,11 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\Blowfish.cpp"
+			RelativePath="..\..\Libs\General\General.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\Blowfish.h"
+			RelativePath="..\..\Libs\General\General.h"
 			>
 		</File>
 	</Files>

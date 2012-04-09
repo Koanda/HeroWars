@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="enet-1.2.5"
-	ProjectGUID="{8396D19A-F583-4DB7-B02E-25A04EA97626}"
-	RootNamespace="enet125"
+	Name="UpxLoader"
+	ProjectGUID="{D6996E56-E674-4102-9F4E-2407F4A87D4F}"
+	RootNamespace="UpxLoader"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,8 +18,8 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory=".\UpxLoader_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\UpxLoader_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			>
@@ -44,11 +44,10 @@
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
-				RuntimeLibrary="3"
+				RuntimeLibrary="1"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
-				CompileAs="1"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -61,6 +60,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="psapi.lib"
+				OutputFile="$(OutDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -80,8 +81,8 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory=".\UpxLoader_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\UpxLoader_$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -106,7 +107,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
-				RuntimeLibrary="2"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -123,6 +124,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="Psapi.lib"
+				OutputFile="$(OutDir)\$(ProjectName).lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -144,86 +147,14 @@
 	<References>
 	</References>
 	<Files>
-		<Filter
-			Name="Source Files"
-			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
-			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
+		<File
+			RelativePath="..\..\Libs\UpxLoader\Upx.cpp"
 			>
-			<File
-				RelativePath="callbacks.c"
-				>
-			</File>
-			<File
-				RelativePath="host.c"
-				>
-			</File>
-			<File
-				RelativePath="list.c"
-				>
-			</File>
-			<File
-				RelativePath="packet.c"
-				>
-			</File>
-			<File
-				RelativePath="peer.c"
-				>
-			</File>
-			<File
-				RelativePath="protocol.c"
-				>
-			</File>
-			<File
-				RelativePath="unix.c"
-				>
-			</File>
-			<File
-				RelativePath="win32.c"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Header Files"
-			Filter="h;hpp;hxx;hm;inl;inc;xsd"
-			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
+		</File>
+		<File
+			RelativePath="..\..\Libs\UpxLoader\Upx.h"
 			>
-			<File
-				RelativePath="enet\callbacks.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\enet.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\list.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\protocol.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\time.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\types.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\unix.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\utility.h"
-				>
-			</File>
-			<File
-				RelativePath="enet\win32.h"
-				>
-			</File>
-		</Filter>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

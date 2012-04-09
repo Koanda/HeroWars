@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="WonderCrypt"
-	ProjectGUID="{1C34F139-9A75-4359-ABB1-0474FE852DED}"
-	RootNamespace="WonderCrypt"
+	Name="League of Legends"
+	ProjectGUID="{17C944F7-762A-467B-86D6-7A3D64BCAB27}"
+	RootNamespace="LeagueofLegends"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,9 +18,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory=".\LoL_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\LoL_$(PlatformName)_$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="1"
 			>
 			<Tool
@@ -41,7 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="..\..\Libs;..\..\Shared;..\..\Libs\enet-1.2.5"
+				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;WIN32;_DEBUG;_WINDOWS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -59,11 +60,19 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\..\bin\$(ProjectName).lib"
+				Name="VCLinkerTool"
+				AdditionalDependencies="ws2_32.lib"
+				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).dll"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -75,14 +84,17 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory=".\LoL_$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\LoL_$(PlatformName)_$(ConfigurationName)"
+			ConfigurationType="2"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
 			>
@@ -105,7 +117,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				AdditionalIncludeDirectories="..\..\Libs;..\..\Shared;..\..\Libs\enet-1.2.5"
+				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;WIN32;NDEBUG;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -122,11 +135,20 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				OutputFile="..\..\bin\$(ProjectName).lib"
+				Name="VCLinkerTool"
+				AdditionalDependencies="ws2_32.lib"
+				LinkIncremental="1"
+				GenerateDebugInformation="true"
+				SubSystem="2"
+				OptimizeReferences="2"
+				EnableCOMDATFolding="2"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -138,6 +160,9 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
@@ -146,23 +171,27 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Aes"
+			Name="Skeleton"
 			>
 			<File
-				RelativePath=".\Aes.cpp"
+				RelativePath="..\..\Cores\Skeleton.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\Aes.h"
+				RelativePath="..\..\Cores\Skeleton.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\WonderCrypt.cpp"
+			RelativePath="..\..\Cores\League of Legends\DllMain.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\WonderCrypt.h"
+			RelativePath="..\..\Cores\League of Legends\LeagueOfLegends.cpp"
+			>
+		</File>
+		<File
+			RelativePath="..\..\Cores\League of Legends\LeagueOfLegends.h"
 			>
 		</File>
 	</Files>
