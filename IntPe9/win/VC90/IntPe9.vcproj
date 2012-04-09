@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="..\..\Libs;..\..\Shared;..\..\IntPe9;..\..\IntPe9\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
-				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_THREAD_SUPPORT;QT_NO_DEBUG,NDEBUG;QT_CORE_LIB;QT_GUI_LIB"
+				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_THREAD_SUPPORT;QT_NO_DEBUG,NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_DLL"
 				RuntimeLibrary="0"
 				TreatWChar_tAsBuiltInType="false"
 				DebugInformationFormat="0"
@@ -83,6 +83,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Qt Runtime"
+				CommandLine="copy $(QTDIR)\bin\QtCore4.dll ..\..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy $(QTDIR)\bin\QtGui4.dll ..\..\bin\$(ConfigurationName)\"
 			/>
 		</Configuration>
 		<Configuration
@@ -110,7 +112,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="..\..\Libs;..\..\Shared;..\..\IntPe9;..\..\IntPe9\GeneratedFiles;&quot;$(QTDIR)\include&quot;;&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)&quot;;&quot;$(QTDIR)\include\QtCore&quot;;&quot;$(QTDIR)\include\QtGui&quot;"
-				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_THREAD_SUPPORT;QT_CORE_LIB;QT_GUI_LIB"
+				PreprocessorDefinitions="BOOST_DATE_TIME_NO_LIB;UNICODE;WIN32;QT_LARGEFILE_SUPPORT;QT_THREAD_SUPPORT;QT_CORE_LIB;QT_GUI_LIB;QT_DLL"
 				RuntimeLibrary="1"
 				TreatWChar_tAsBuiltInType="false"
 				DebugInformationFormat="3"
@@ -154,6 +156,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Qt Runtime"
+				CommandLine="copy $(QTDIR)\bin\QtCored4.dll ..\..\bin\$(ConfigurationName)\&#x0D;&#x0A;copy $(QTDIR)\bin\QtGuid4.dll ..\..\bin\$(ConfigurationName)\"
 			/>
 		</Configuration>
 	</Configurations>
@@ -178,7 +182,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing Injector.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -189,7 +193,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing Injector.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -508,7 +512,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -519,7 +523,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -538,7 +542,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -549,7 +553,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -572,7 +576,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -583,7 +587,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -602,7 +606,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -613,7 +617,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing $(InputFileName)..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -644,7 +648,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qhexedit.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -655,7 +659,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qhexedit.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -674,7 +678,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qhexedit_p.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -685,7 +689,7 @@
 					<Tool
 						Name="VCCustomBuildTool"
 						Description="Moc&apos;ing qhexedit_p.h..."
-						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
+						CommandLine="&quot;$(QTDIR)\bin\moc.exe&quot;   -DBOOST_DATE_TIME_NO_LIB -DUNICODE -DWIN32 -DQT_LARGEFILE_SUPPORT -DQT_THREAD_SUPPORT -DQT_CORE_LIB -DQT_GUI_LIB -DQT_DLL  &quot;-I.\..\..\Libs&quot; &quot;-I.\..\..\Shared&quot; &quot;-I.\..\..\IntPe9&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles&quot; &quot;-I$(QTDIR)\include&quot; &quot;-I.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\.&quot; &quot;-I$(QTDIR)\include\QtCore&quot; &quot;-I$(QTDIR)\include\QtGui&quot; &quot;$(InputPath)&quot; -o &quot;.\..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;&#x0D;&#x0A;"
 						AdditionalDependencies="&quot;$(QTDIR)\bin\moc.exe&quot;;$(InputPath)"
 						Outputs="&quot;..\..\IntPe9\GeneratedFiles\$(ConfigurationName)\moc_$(InputName).cpp&quot;"
 					/>
@@ -720,7 +724,7 @@
 		/>
 		<Global
 			Name="QtVersion Win32"
-			Value="4.7.4"
+			Value="Qt 4.8.0"
 		/>
 		<Global
 			Name="RccDir"
