@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Skeleton">
+      <UniqueIdentifier>{e3e64946-1d1f-4f6f-bad6-98bbaebc44df}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Cores\Skeleton.cpp">
+      <Filter>Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Cores\League of Legends\DllMain.cpp" />
+    <ClCompile Include="..\..\Cores\League of Legends\LeagueOfLegends.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Cores\Skeleton.h">
+      <Filter>Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Cores\League of Legends\LeagueOfLegends.h" />
+  </ItemGroup>
+</Project>
