@@ -22,7 +22,7 @@ void Log::setStream(ostream* stream)
 void Log::setOutputFile(const char* path)
 {
 	ofstream *filestream = new ofstream();
-	filestream->open("path");
+	filestream->open(path);
 	setStream(filestream);
 }
 
