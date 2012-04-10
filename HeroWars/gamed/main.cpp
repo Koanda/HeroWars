@@ -24,9 +24,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SERVER_PORT 5109
 #define SERVER_KEY "ODlks70+e2SYHI2doO6LKw=="
 
-#define SERVER_VERSION "0.0.1"
+#define SERVER_VERSION "0.0.2"
 
-int main (int argc, char ** argv) 
+int main(int argc, char ** argv) 
 {
 	Log::getMainInstance()->writeLine("HeroWars %s\n",SERVER_VERSION);
 	NetworkListener *listener = new NetworkListener();
@@ -35,7 +35,7 @@ int main (int argc, char ** argv)
 	address.port = SERVER_PORT;
 
 	listener->initialize(&address, SERVER_KEY);
-	Log::getMainInstance()->writeLine("Starting netloop\n");
+	Log::getMainInstance()->writeLine("Starting net loop\n");
 	listener->netLoop();
 	delete listener;
 

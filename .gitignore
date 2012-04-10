@@ -50,10 +50,6 @@ autom4te.cache
 callgrind.out.*
 
 # Visual studio
-Debug
-Release
-*_Debug
-*_Release
 *.webinfo
 *.ncb
 *.suo

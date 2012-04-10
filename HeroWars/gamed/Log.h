@@ -6,9 +6,9 @@
 #include <Windows.h>
 
 #define LOG_BUFFER_SIZE 1024
-#define DEBUG_LOG
+#define DO_LOG
 
-#ifdef DEBUG_LOG
+#ifdef DO_LOG
 #define PDEBUG_LOG_LINE(pLogHandler,buffer,...) pLogHandler->debugLine(buffer,__VA_ARGS__)
 #define VDEBUG_LOG_LINE(LogHandler,buffer,...) LogHandler.debugLine(buffer,__VA_ARGS__)
 #define PDEBUG_LOG(pLogHandler,buffer,...) pLogHandler->debug(buffer,__VA_ARGS__)

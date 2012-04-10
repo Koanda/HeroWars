@@ -1,15 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gamed", "VS2008\gamed.vcproj", "{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}"
-	ProjectSection(ProjectDependencies) = postProject
-		{AA18CE3F-30E5-49FF-971C-6715A70786A8} = {AA18CE3F-30E5-49FF-971C-6715A70786A8}
-		{253D40B4-8B15-44D1-A718-C4035A31E5DE} = {253D40B4-8B15-44D1-A718-C4035A31E5DE}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "gamed", "VC100\gamed.vcxproj", "{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "enet-1.2.5", "VS2008\enet-1.2.5.vcproj", "{AA18CE3F-30E5-49FF-971C-6715A70786A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "enet-1.2.5", "VC100\enet-1.2.5.vcxproj", "{AA18CE3F-30E5-49FF-971C-6715A70786A8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "intlib", "VS2008\intlib.vcproj", "{253D40B4-8B15-44D1-A718-C4035A31E5DE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "intlib", "VC100\intlib.vcxproj", "{253D40B4-8B15-44D1-A718-C4035A31E5DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="intlib"
-	ProjectGUID="{253D40B4-8B15-44D1-A718-C4035A31E5DE}"
-	RootNamespace="intlib"
+	Name="gamed"
+	ProjectGUID="{6F0516D6-EFA7-41FA-9068-B7CB911CBC48}"
+	RootNamespace="gamed"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -18,9 +18,9 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(ProjectName)_$(ConfigurationName)"
-			IntermediateDirectory="$(ProjectName)_$(ConfigurationName)"
-			ConfigurationType="4"
+			OutputDirectory=".\$(ProjectName)__$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\$(ProjectName)__$(PlatformName)_$(ConfigurationName)"
+			ConfigurationType="1"
 			CharacterSet="1"
 			>
 			<Tool
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\dep\include"
+				AdditionalIncludeDirectories="..\dep\include; ..\;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -60,10 +60,19 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
+				Name="VCLinkerTool"
+				AdditionalDependencies="ws2_32.lib Winmm.lib"
+				OutputFile="..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				LinkIncremental="2"
+				GenerateDebugInformation="true"
+				SubSystem="1"
+				TargetMachine="1"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -75,13 +84,16 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
+				Name="VCAppVerifierTool"
+			/>
+			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
-			IntermediateDirectory="$(ConfigurationName)"
+			OutputDirectory=".\$(ProjectName)__$(PlatformName)_$(ConfigurationName)"
+			IntermediateDirectory=".\$(ProjectName)__$(PlatformName)_$(ConfigurationName)"
 			ConfigurationType="1"
 			CharacterSet="1"
 			WholeProgramOptimization="1"
@@ -105,6 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="..\dep\include; ..\;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -123,6 +136,8 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="ws2_32.lib Winmm.lib"
+				OutputFile="..\bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -162,11 +177,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\dep\src\intlib\base64.cpp"
+				RelativePath="..\gamed\Log.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\intlib\blowfish.cpp"
+				RelativePath="..\gamed\NetworkListener.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\gamed\NetworkListener.h"
 				>
 			</File>
 		</Filter>
@@ -176,14 +195,48 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\dep\include\intlib\base64.h"
+				RelativePath="..\common.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\intlib\blowfish.h"
+				RelativePath="..\gamed\Log.h"
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Resource Files"
+			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
+			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
+			>
+		</Filter>
+		<Filter
+			Name="Protocol"
+			>
+			<File
+				RelativePath="..\gamed\Handlers.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\gamed\PacketHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\gamed\PacketHandler.h"
+				>
+			</File>
+			<File
+				RelativePath="..\gamed\Packets.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\gamed\Packets.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath="..\gamed\main.cpp"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -5,6 +5,7 @@ Log::Log()
 {
 	m_stream = &cout;
 	m_type = LT_NORMAL;
+	m_instance = NULL;
 }
 
 Log::~Log()
@@ -128,7 +129,7 @@ void Log::vaWrite(const char* buffer,va_list al)
 
 Log* Log::getMainInstance()
 {
-	if(m_instance == nullptr)
+	if(m_instance == NULL)
 	{
 		m_instance = new Log();
 	}
