@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\dep\include"
+				AdditionalIncludeDirectories="..\..\dep\include; ..\..\dep\include\intlib;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -105,7 +105,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\dep\include"
+				AdditionalIncludeDirectories="..\..\dep\include; ..\..\dep\include\intlib;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -151,11 +151,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\dep\src\intlib\base64.cpp"
+				RelativePath="..\..\dep\src\intlib\base64.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\intlib\blowfish.cpp"
+				RelativePath="..\..\dep\src\intlib\blowfish.cpp"
 				>
 			</File>
 		</Filter>
@@ -165,11 +165,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\dep\include\intlib\base64.h"
+				RelativePath="..\..\dep\include\intlib\base64.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\intlib\blowfish.h"
+				RelativePath="..\..\dep\include\intlib\blowfish.h"
 				>
 			</File>
 		</Filter>

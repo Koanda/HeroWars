@@ -11,18 +11,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\dep\src\intlib\base64.cpp">
+    <ClCompile Include="..\..\dep\src\intlib\base64.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\intlib\blowfish.cpp">
+    <ClCompile Include="..\..\dep\src\intlib\blowfish.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\dep\include\intlib\base64.h">
+    <ClInclude Include="..\..\dep\include\intlib\base64.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\intlib\blowfish.h">
+    <ClInclude Include="..\..\dep\include\intlib\blowfish.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

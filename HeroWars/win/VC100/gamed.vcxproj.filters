@@ -18,39 +18,37 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\gamed\Log.cpp">
+    <ClCompile Include="..\..\gamed\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gamed\NetworkListener.cpp">
+    <ClCompile Include="..\..\gamed\NetworkListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\gamed\Handlers.cpp">
+    <ClCompile Include="..\..\gamed\Handlers.cpp">
       <Filter>Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="..\gamed\PacketHandler.cpp">
+    <ClCompile Include="..\..\gamed\PacketHandler.cpp">
       <Filter>Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="..\gamed\Packets.cpp">
+    <ClCompile Include="..\..\gamed\Packets.cpp">
       <Filter>Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="..\gamed\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="..\..\gamed\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\gamed\NetworkListener.h">
+    <ClInclude Include="..\..\gamed\NetworkListener.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\common.h">
+    <ClInclude Include="..\..\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\gamed\Log.h">
+    <ClInclude Include="..\..\gamed\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\gamed\PacketHandler.h">
+    <ClInclude Include="..\..\gamed\PacketHandler.h">
       <Filter>Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="..\gamed\Packets.h">
+    <ClInclude Include="..\..\gamed\Packets.h">
       <Filter>Protocol</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,6 +1,6 @@
 #include <cstring>
 #include <exception>
-#include <intlib/blowfish.h>
+#include <blowfish.h>
 
 using std::exception;
 

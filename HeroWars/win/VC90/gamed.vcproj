@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\dep\include; ..\;"
+				AdditionalIncludeDirectories="..\..\dep\include; ..\..\;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ws2_32.lib Winmm.lib"
-				OutputFile="..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\dep\include; ..\;"
+				AdditionalIncludeDirectories="..\..\dep\include; ..\..\;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -137,7 +137,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="ws2_32.lib Winmm.lib"
-				OutputFile="..\bin\$(ConfigurationName)\$(ProjectName).exe"
+				OutputFile="..\..\bin\$(ConfigurationName)\$(ProjectName).exe"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="1"
@@ -177,15 +177,15 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\gamed\Log.cpp"
+				RelativePath="..\..\gamed\Log.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\NetworkListener.cpp"
+				RelativePath="..\..\gamed\NetworkListener.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\NetworkListener.h"
+				RelativePath="..\..\gamed\NetworkListener.h"
 				>
 			</File>
 		</Filter>
@@ -199,7 +199,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\Log.h"
+				RelativePath="..\..\gamed\Log.h"
 				>
 			</File>
 		</Filter>
@@ -213,28 +213,28 @@
 			Name="Protocol"
 			>
 			<File
-				RelativePath="..\gamed\Handlers.cpp"
+				RelativePath="..\..\gamed\Handlers.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\PacketHandler.cpp"
+				RelativePath="..\..\gamed\PacketHandler.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\PacketHandler.h"
+				RelativePath="..\..\gamed\PacketHandler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\Packets.cpp"
+				RelativePath="..\..\gamed\Packets.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\gamed\Packets.h"
+				RelativePath="..\..\gamed\Packets.h"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\gamed\main.cpp"
+			RelativePath="..\..\gamed\main.cpp"
 			>
 		</File>
 	</Files>

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..\dep\include"
+				AdditionalIncludeDirectories="..\..\dep\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -106,7 +106,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..\dep\include"
+				AdditionalIncludeDirectories="..\..\dep\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -152,35 +152,35 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\dep\src\enet\callbacks.c"
+				RelativePath="..\..\dep\src\enet\callbacks.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\host.c"
+				RelativePath="..\..\dep\src\enet\host.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\list.c"
+				RelativePath="..\..\dep\src\enet\list.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\packet.c"
+				RelativePath="..\..\dep\src\enet\packet.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\peer.c"
+				RelativePath="..\..\dep\src\enet\peer.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\protocol.c"
+				RelativePath="..\..\dep\src\enet\protocol.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\unix.c"
+				RelativePath="..\..\dep\src\enet\unix.c"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\src\enet\win32.c"
+				RelativePath="..\..\dep\src\enet\win32.c"
 				>
 			</File>
 		</Filter>
@@ -190,39 +190,39 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\dep\include\enet\callbacks.h"
+				RelativePath="..\..\dep\include\enet\callbacks.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\enet.h"
+				RelativePath="..\..\dep\include\enet\enet.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\list.h"
+				RelativePath="..\..\dep\include\enet\list.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\protocol.h"
+				RelativePath="..\..\dep\include\enet\protocol.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\time.h"
+				RelativePath="..\..\dep\include\enet\time.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\types.h"
+				RelativePath="..\..\dep\include\enet\types.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\unix.h"
+				RelativePath="..\..\dep\include\enet\unix.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\utility.h"
+				RelativePath="..\..\dep\include\enet\utility.h"
 				>
 			</File>
 			<File
-				RelativePath="..\dep\include\enet\win32.h"
+				RelativePath="..\..\dep\include\enet\win32.h"
 				>
 			</File>
 		</Filter>

@@ -51,7 +51,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\dep\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\dep\include;..\..\dep\include\intlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -66,7 +66,7 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>..\dep\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\dep\include;..\..\dep\include\intlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -77,12 +77,12 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\dep\src\intlib\base64.cpp" />
-    <ClCompile Include="..\dep\src\intlib\blowfish.cpp" />
+    <ClCompile Include="..\..\dep\src\intlib\base64.cpp" />
+    <ClCompile Include="..\..\dep\src\intlib\blowfish.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\dep\include\intlib\base64.h" />
-    <ClInclude Include="..\dep\include\intlib\blowfish.h" />
+    <ClInclude Include="..\..\dep\include\intlib\base64.h" />
+    <ClInclude Include="..\..\dep\include\intlib\blowfish.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

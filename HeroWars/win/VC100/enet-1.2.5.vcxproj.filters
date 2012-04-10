@@ -11,57 +11,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\dep\src\enet\callbacks.c">
+    <ClCompile Include="..\..\dep\src\enet\callbacks.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\host.c">
+    <ClCompile Include="..\..\dep\src\enet\host.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\list.c">
+    <ClCompile Include="..\..\dep\src\enet\list.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\packet.c">
+    <ClCompile Include="..\..\dep\src\enet\packet.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\peer.c">
+    <ClCompile Include="..\..\dep\src\enet\peer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\protocol.c">
+    <ClCompile Include="..\..\dep\src\enet\protocol.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\unix.c">
+    <ClCompile Include="..\..\dep\src\enet\unix.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\dep\src\enet\win32.c">
+    <ClCompile Include="..\..\dep\src\enet\win32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\dep\include\enet\callbacks.h">
+    <ClInclude Include="..\..\dep\include\enet\callbacks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\enet.h">
+    <ClInclude Include="..\..\dep\include\enet\enet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\list.h">
+    <ClInclude Include="..\..\dep\include\enet\list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\protocol.h">
+    <ClInclude Include="..\..\dep\include\enet\protocol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\time.h">
+    <ClInclude Include="..\..\dep\include\enet\time.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\types.h">
+    <ClInclude Include="..\..\dep\include\enet\types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\unix.h">
+    <ClInclude Include="..\..\dep\include\enet\unix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\utility.h">
+    <ClInclude Include="..\..\dep\include\enet\utility.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\dep\include\enet\win32.h">
+    <ClInclude Include="..\..\dep\include\enet\win32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
