@@ -4,11 +4,16 @@ const PacketTable table[] =
 {
 	{PKT_KeyCheck,				&PacketHandler::handleKeyCheck		},
 	{PKT_C2S_Ping_Load_Info,	&PacketHandler::handleLoadPing		},
-	{PKT_C2S_CharSelected,		&PacketHandler::handleSpawn			},
+	{PKT_C2S_CharLoaded,		&PacketHandler::handleSpawn			},
 	{PKT_C2S_ClientReady,		&PacketHandler::handleMap			},
 	{PKT_C2S_SynchVersion,		&PacketHandler::handleSynch			},
 	{PKT_C2S_GameNumberReq,		&PacketHandler::handleGameNumber	},
 	{PKT_C2S_QueryStatusReq,	&PacketHandler::handleQueryStatus	},
+	{PKT_C2S_Loaded,			&PacketHandler::handleInit			},
+	{PKT_C2S_Exit,				&PacketHandler::handleNull			},
+	{PKT_C2S_ViewReq,			&PacketHandler::handleView			},
+	{PKT_C2S_Click,				&PacketHandler::handleNull			},
+	{PKT_C2S_AttentionPing,		&PacketHandler::handleAttentionPing },
 };
 
 PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)

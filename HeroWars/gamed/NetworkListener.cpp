@@ -56,7 +56,9 @@ void NetworkListener::netLoop()
 
 		case ENET_EVENT_TYPE_RECEIVE:
 			if(!_handler->handlePacket(event.peer, event.packet))
-				enet_peer_disconnect(event.peer, 0);
+			{
+				//enet_peer_disconnect(event.peer, 0);
+			}
 
 			/* Clean up the packet now that we're done using it. */
 			enet_packet_destroy (event.packet);

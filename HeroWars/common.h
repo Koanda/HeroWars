@@ -20,12 +20,19 @@ enum PacketCmd : uint8
 	PKT_World_SendGameNumber = 0x99,
 	PKT_C2S_QueryStatusReq = 0x17,
 	PKT_C2S_SynchVersion = 0xc6,
-	PKT_C2S_CharSelected = 0xc7,
+	PKT_C2S_CharLoaded = 0xc7,
 	PKT_C2S_Exit = 0x95,
 	PKT_C2S_ClientReady = 0x64,
 	PKT_C2S_GameNumberReq = 0xA5,
 	PKT_C2S_Ping_Load_Info = 0x19,
 	PKT_S2C_Ping_Load_Info = 0x9E,
+	PKT_C2S_Loaded = 0x56,
+	PKT_C2S_ViewReq = 0x30,
+	PKT_S2C_ViewAns = 0x2E,
+	PKT_S2C_FogUpdate = 0x7A,
+	PKT_C2S_Click = 0xB8,
+	PKT_C2S_AttentionPing = 0x5B,
+	PKT_S2C_AttentionPing = 0x47,
 
 
 

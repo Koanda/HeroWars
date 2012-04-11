@@ -184,10 +184,6 @@
 				RelativePath="..\..\gamed\NetworkListener.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\gamed\NetworkListener.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -195,11 +191,19 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\common.h"
+				RelativePath="..\..\gamed\Client.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\common.h"
 				>
 			</File>
 			<File
 				RelativePath="..\..\gamed\Log.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\gamed\NetworkListener.h"
 				>
 			</File>
 		</Filter>

@@ -34,6 +34,9 @@ class PacketHandler
 		bool handleSynch(HANDLE_ARGS);
 		bool handleGameNumber(HANDLE_ARGS);
 		bool handleQueryStatus(HANDLE_ARGS);
+		bool handleInit(HANDLE_ARGS);
+		bool handleView(HANDLE_ARGS);
+		bool handleAttentionPing(HANDLE_ARGS);
 
 		//Tools
 		void printPacket(uint8 *buf, uint32 len);

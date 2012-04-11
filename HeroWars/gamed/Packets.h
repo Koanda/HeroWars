@@ -64,7 +64,7 @@ typedef struct _SpawnPacket
 
 	uint32 getPacketLength()
 	{
-		return sizeof(_SpawnPacket)+length-1;
+		return sizeof(_SpawnPacket)+length;
 	}
 } SpawnPacket;
 
@@ -89,6 +89,87 @@ typedef struct _KeyCheck
 		return reinterpret_cast<uint8*>((reinterpret_cast<uint64*>(&checkId)));
 	}
 } KeyCheck;
+
+typedef struct _AttentionPing
+{
+	_AttentionPing()
+	{
+
+	}
+	_AttentionPing(_AttentionPing *ping)
+	{
+		cmd = ping->cmd;
+		unk1 = ping->unk1;
+		x = ping->x;
+		y = ping->y;
+		z = ping->z;
+		unk2 = ping->unk2;
+		type = ping->type;
+	}
+
+	uint8 cmd;
+	uint32 unk1;
+	float x;
+	float y;
+	float z;
+	uint32 unk2;
+	uint8 type;
+} AttentionPing;
+
+typedef struct _AttentionPingAns
+{
+	_AttentionPingAns(AttentionPing *ping)
+	{
+		attentionPing = AttentionPing(ping);
+		attentionPing.cmd = PKT_S2C_AttentionPing;
+	}
+
+	AttentionPing attentionPing;
+	uint32 response;
+} AttentionPingAns;
+typedef struct _ViewReq
+{
+	uint8 cmd;
+	uint32 unk1;
+	float x;
+	float zoom;
+	float y;
+	float y2;		//Unk
+	uint32 width;	//Unk
+	uint32 height;	//Unk
+	uint32 unk2;	//Unk
+	uint8 requestNo;
+} ViewReq;
+
+typedef struct _ViewAns
+{
+	_ViewAns()
+	{
+		cmd = PKT_S2C_ViewAns;
+		unk1 = 0;
+	}
+
+	uint8 cmd;
+	uint32 unk1;
+	uint8 requestNo;
+} ViewAns;
+
+typedef struct _FogUpdate
+{
+	_FogUpdate()
+	{
+		cmd = PKT_S2C_FogUpdate;
+		x1 = 0;
+		y1 = 0;
+		x2 = 0.5;
+		y2 = 0.5;
+	}
+	uint8 cmd;
+	float x1;
+	float y1;
+	float x2;
+	float y2;
+} FogUpdate;
 
 typedef struct _QueryStatus
 {

@@ -21,22 +21,22 @@ typedef struct _ClientInfo
 
 	void setName(char *name)
 	{
-		if(name != NULL)
-			delete[] name;
+		if(this->name != NULL)
+			delete[] this->name;
 
 		nameLen = strlen(name);
-		this->name = new int8[nameLen];
-		memcpy(this->name, name, nameLen);
+		this->name = new int8[nameLen+1];
+		memcpy(this->name, name, nameLen+1);
 	}
 
 	void setType(char *type)
 	{
-		if(type != NULL)
-			delete[] type;
+		if(this->type != NULL)
+			delete[] this->type;
 
 		typeLen = strlen(type);
-		this->type = new int8[typeLen];
-		memcpy(this->type, type, typeLen);
+		this->type = new int8[typeLen+1];
+		memcpy(this->type, type, typeLen+1);
 	}
 
 	bool keyChecked;
