@@ -1,0 +1,35 @@
+User id: 71 AE 33 01
+
+Test 1 = 28 CE 29
+Original				Modded big packet		Enet reflect	Enet mod
+IV1: ED 8C 4C 74		ED 8C 4C 74				ED 8C 4C 74		ED 8C 4C 74
+IV2: 0F 79				3F 68					0F 79			9F 79
+IV3: ED 3E				ED 3E					ED 3E			ED 3E
+Difference				30 11					00 00			90 00
+
+Test 2 = 1E B6 28
+Original				Modded big packet		Enet reflect	Enet mod
+IV1: ED 8C 3E 74		ED 8C 3E 74				ED 8C 3E 74		ED 8C 3E 74
+IV2: 78 45				48 54					78 45			E8 45
+IV3: BB 1D				BB 1D					BB 1D			BB 1D
+Difference			   -30 -F					00 00			70 00
+
+Test 3 = F7 EB 05
+Original				Modded big packet		Enet reflect	Enet mod
+IV1: ED 8C 9A 74		ED 8C 9A 74				ED 8C 9A 74		ED 8C 9A 74
+IV2: 17 A7				27 B6					17 A7			87 A7
+IV3: 8F 33				8F 33					8F 33			8F 33
+Difference				10 -F					00 00			70 00
+
+Test 4 = A3 C0 85
+Original				Modded big packet		Enet reflect	Enet mod
+IV1: AC 61 F0 02		ED 8C 2E 74				AC 61 F0 02		ED 8C 2E 74
+IV2: F8 04				66 DD					F8 04			06 CF
+IV3: AC 02				D1 00					AC 02			D1 00	
+
+Test 5 = 76 58 90
+Original				Modded big packet		Enet reflect	Enet mod
+IV1: ED 8C 0A 74		ED 8C 0A 74				ED 8C 0A 74		ED 8C 0A 74
+IV2: 87 D4				B7 C5					87 D4			17 D4
+IV3: 29 32				29 32					29 32			29 32
+Difference				30 -F					00 00			70 00
