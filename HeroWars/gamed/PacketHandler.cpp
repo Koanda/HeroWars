@@ -1,22 +1,15 @@
 #include "PacketHandler.h"
 
-typedef struct PacketTable
-{
-	PacketCmd cmd;
-	bool (PacketHandler::*handler)(HANDLE_ARGS);
-}AuthHandler;
-
 const PacketTable table[] =
 {
-	{PKT_KeyCheck,			&PacketHandler::handleKeyCheck		},
+	{PKT_KeyCheck,				&PacketHandler::handleKeyCheck		},
 	{PKT_C2S_Ping_Load_Info,	&PacketHandler::handleLoadPing		},
-	{PKT_C2S_CharSelected,		&PacketHandler::handleSpawn		},
-	{PKT_C2S_ClientReady,		&PacketHandler::handleMap		},
-	{PKT_C2S_SynchVersion,		&PacketHandler::handleSynch		},
+	{PKT_C2S_CharSelected,		&PacketHandler::handleSpawn			},
+	{PKT_C2S_ClientReady,		&PacketHandler::handleMap			},
+	{PKT_C2S_SynchVersion,		&PacketHandler::handleSynch			},
 	{PKT_C2S_GameNumberReq,		&PacketHandler::handleGameNumber	},
 	{PKT_C2S_QueryStatusReq,	&PacketHandler::handleQueryStatus	},
 };
-#define TOTAL_HANDLERS sizeof(table)/sizeof(PacketTable)
 
 PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)
 {
@@ -51,7 +44,8 @@ void PacketHandler::printLine(uint8 *buf, uint32 len)
 bool PacketHandler::sendPacket(ENetPeer *peer, uint8 *data, uint32 length, uint8 channelNo, uint32 flag)
 {
 	PDEBUG_LOG_LINE(Log::getMainInstance()," Sending packet:\n");
-	printPacket(data, length);
+	if(length < 300)
+		printPacket(data, length);
 
 	if(length >= 8)
 		_blowfish->Encrypt(data, length-(length%8)); //Encrypt everything minus the last bytes that overflow the 8 byte boundary
@@ -90,16 +84,13 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 	PacketHeader *header = reinterpret_cast<PacketHeader*>(packet->data);
 
 	bool handled = false;
+
 	for(uint32 i = 0; i < TOTAL_HANDLERS; ++i)
 	{
-		if(table[i].cmd ==  header->cmd)
+		if(table[i].cmd == header->cmd)
 		{
-			if(!(*this.*table[i].handler)(peer, packet))
-			{
-				PDEBUG_LOG_LINE(Log::getMainInstance(),"Handler failed for: %i", header->cmd);
-				return false;
-			}
 			handled = true;
+			return (*this.*table[i].handler)(peer, packet);
 		}
 	}
 
@@ -108,5 +99,5 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 		PDEBUG_LOG_LINE(Log::getMainInstance(),"Unknown packet: %X(%i)\n", header->cmd, header->cmd);
 	}
 
-	return true;
+	return handled;
 }

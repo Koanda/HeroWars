@@ -47,7 +47,11 @@ void NetworkListener::netLoop()
 
 				/* Set some defaults */
 				event.peer->mtu = PEER_MTU;
+
 				event.peer->data = new ClientInfo();
+				peerInfo(event.peer)->setName("IMxHot");
+				peerInfo(event.peer)->setType("Ahri");
+
 			break;
 
 		case ENET_EVENT_TYPE_RECEIVE:

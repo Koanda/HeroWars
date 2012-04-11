@@ -1,16 +1,21 @@
+
 #ifndef _PACKET_HANDLER_H
 #define _PACKET_HANDLER_H
-#include "common.h"
-#include "Packets.h"
-#include "Log.h"
 #include <enet/enet.h>
+#include "common.h"
+#include "Log.h"
+
 #include <intlib/base64.h>
 #include <intlib/blowfish.h>
+
+#include "Packets.h"
+#include "Client.h"
 
 #define RELIABLE ENET_PACKET_FLAG_RELIABLE
 #define UNRELIABLE 0
 
 #define HANDLE_ARGS ENetPeer *peer, ENetPacket *packet
+
 
 class PacketHandler
 {
@@ -21,6 +26,7 @@ class PacketHandler
 		bool handlePacket(ENetPeer *peer, ENetPacket *packet);
 
 		//Handlers
+		bool handleNull(HANDLE_ARGS);
 		bool handleKeyCheck(HANDLE_ARGS);
 		bool handleLoadPing(HANDLE_ARGS);
 		bool handleSpawn(HANDLE_ARGS);
@@ -39,5 +45,12 @@ class PacketHandler
 		ENetHost *_server;
 		BlowFish *_blowfish;
 };
+
+#define TOTAL_HANDLERS sizeof(table)/sizeof(PacketTable)
+typedef struct PacketTable
+{
+	PacketCmd cmd;
+	bool (PacketHandler::*handler)(HANDLE_ARGS);
+}AuthHandler;
 
 #endif

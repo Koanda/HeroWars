@@ -1,5 +1,8 @@
-#include "common.h"
+#ifndef _PACKETS_H
+#define _PACKETS_H
+
 #include <enet/enet.h>
+#include "common.h"
 
 #if defined( __GNUC__ )
 #pragma pack(1)
@@ -35,15 +38,15 @@ uint8 *createDynamicPacket(uint8 *str, uint32 size);
 
 typedef struct _SpawnPacket
 {
-	static _SpawnPacket* create(PacketCmd cmd, uint8 *str, uint32 size)
+	static _SpawnPacket* create(PacketCmd cmd, int8 *str, uint32 size)
 	{
-		uint32 totalSize = sizeof(_SpawnPacket)+size;
+		uint32 totalSize = sizeof(_SpawnPacket)+size+1;
 		uint8* buf = new uint8[totalSize];
 		memset(buf, 0, totalSize);
 
 		_SpawnPacket *type = (_SpawnPacket *)buf;
 		type->header.cmd = cmd;
-		type->length = size+1;
+		type->length = size;
 		memcpy(type->getDescription(), str, type->length);
 		return type;
 	}
@@ -129,4 +132,6 @@ typedef struct _WorldSendGameNumber
 #pragma pack()
 #else
 #pragma pack(pop)
+#endif
+
 #endif

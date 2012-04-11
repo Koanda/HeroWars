@@ -15,7 +15,7 @@ typedef unsigned long long uint64;
 enum PacketCmd : uint8
 {
 	PKT_KeyCheck = 0x00,
-	
+
 	PKT_S2C_QueryStatusAns = 0x8e,
 	PKT_World_SendGameNumber = 0x99,
 	PKT_C2S_QueryStatusReq = 0x17,
@@ -30,19 +30,10 @@ enum PacketCmd : uint8
 
 
 	PKT_SpawnStart = 0x67,
-	PKT_SpawnName = 0x66,
-	PKT_SpawnType = 0x65,
-};
+	PKT_LoadName = 0x66,
+	PKT_LoadType = 0x65,
 
-typedef struct _ClientInfo
-{
-	_ClientInfo()
-	{
-		keyChecked = false;
-	}
-	bool keyChecked;
-	uint64 userId;
-} ClientInfo;
-#define peerInfo(p) ((ClientInfo*)p->data)
+	TOTAL_NUM = 0xff,
+};
 
 #endif
