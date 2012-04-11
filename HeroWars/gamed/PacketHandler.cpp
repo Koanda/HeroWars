@@ -8,11 +8,11 @@ typedef struct PacketTable
 
 const PacketTable table[] =
 {
-	{PKT_KeyCheck,				&PacketHandler::handleKeyCheck		},
+	{PKT_KeyCheck,			&PacketHandler::handleKeyCheck		},
 	{PKT_C2S_Ping_Load_Info,	&PacketHandler::handleLoadPing		},
-	{PKT_C2S_CharSelected,		&PacketHandler::handleSpawn			},
-	{PKT_C2S_ClientReady,		&PacketHandler::handleMap			},
-	{PKT_C2S_SynchVersion,		&PacketHandler::handleSynch			},
+	{PKT_C2S_CharSelected,		&PacketHandler::handleSpawn		},
+	{PKT_C2S_ClientReady,		&PacketHandler::handleMap		},
+	{PKT_C2S_SynchVersion,		&PacketHandler::handleSynch		},
 	{PKT_C2S_GameNumberReq,		&PacketHandler::handleGameNumber	},
 	{PKT_C2S_QueryStatusReq,	&PacketHandler::handleQueryStatus	},
 };

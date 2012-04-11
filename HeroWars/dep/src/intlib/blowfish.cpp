@@ -294,6 +294,11 @@ const unsigned int BlowFish::scm_auiInitS[4][256] = {
 	0xb74e6132, 0xce77e25b, 0x578fdfe3, 0x3ac372e6}
 };
 
+unsigned char *BlowFish::getKey()
+{
+	return _keyCopy;
+}
+
 //Constructor - Initialize the P and S boxes for a given Key
 BlowFish::BlowFish(unsigned char* ucKey, size_t keysize, const SBlock& roChain) : m_oChain0(roChain), m_oChain(roChain)
 {
@@ -304,6 +309,11 @@ BlowFish::BlowFish(unsigned char* ucKey, size_t keysize, const SBlock& roChain) 
 		keysize = 56;
 	unsigned char aucLocalKey[56];
 	unsigned int i, j;
+
+	//Save a copy of the used key
+	_keyCopy = new unsigned char[keysize];
+	memcpy(_keyCopy, ucKey, keysize);
+
 	memcpy(aucLocalKey, ucKey, keysize);
 	//Reflexive Initialization of the Blowfish.
 	//Generating the Subkeys from the Key flood P and S boxes with PI

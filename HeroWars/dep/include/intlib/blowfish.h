@@ -166,6 +166,8 @@ public:
 	void Encrypt(const unsigned char* in, unsigned char* out, size_t n, int iMode=ECB);
 	void Decrypt(const unsigned char* in, unsigned char* out, size_t n, int iMode=ECB);
 
+	unsigned char *getKey();
+
 //Private Functions
 private:
 	unsigned int F(unsigned int ui);
@@ -174,6 +176,7 @@ private:
 
 private:
 	//The Initialization Vector, by default {0, 0}
+	unsigned char *_keyCopy;
 	SBlock m_oChain0;
 	SBlock m_oChain;
 	unsigned int m_auiP[18];

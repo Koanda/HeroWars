@@ -32,9 +32,17 @@ LeagueOfLegends::LeagueOfLegends()
 	memcpy((char*)_key, &cmd[sStart], _keySize);
 
 	//Create blowfish
+	_key[_keySize] = 0x00;
 	DbgPrint("The base64 key they use is: %s", _key);
 
 	uint32 size = decode_base64(_keyDecrypted, (const char*)_key);
+
+	uint8 hexKey[3*8+1];
+	for(int i = 0; i < 8; i++)
+		sprintf_s((char*)&hexKey[i*3], 3*8+1, "%02X ", (uint8)_keyDecrypted[i]);
+	hexKey[3*8] = 0x00;
+	DbgPrint("The hex key the use: %s", hexKey);
+
 	blowfish = new BlowFish(_keyDecrypted, size);
 
 }
