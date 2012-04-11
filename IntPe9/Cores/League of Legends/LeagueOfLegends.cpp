@@ -75,7 +75,7 @@ uint8 *reassemblePacket(ENetProtocol *command, uint32 length, uint32 *dataLength
 	totalLength = ENET_NET_TO_HOST_32(command->sendFragment.totalLength);
 
 	//As i have no idea if these packets are getting correctly sequenced, but i hope so... else my code would crash so hard
-	*dataLength = totalLength;
+	*dataLength = fragmentLength;
 	if(fragmentNumber == 0)
 	{
 		MessagePacket *packet = (MessagePacket*)new uint8[totalLength+sizeof(MessagePacket)];
@@ -92,26 +92,26 @@ uint8 *reassemblePacket(ENetProtocol *command, uint32 length, uint32 *dataLength
 	else
 		return NULL;
 }
-uint8 *parseEnet(char *buffer, uint32 length, uint32 *dataLength, bool *isFragment)
-{
-	if(length < sizeof(ENetProtocolHeader) || length > MQ_MAX_SIZE)
-		return NULL;
 
-	*dataLength = 0;
-	uint16 peerId, flags, headerSize, size;
+uint32 parseHeader(char *buffer, uint32 length)
+{
+	uint16 peerId, flags, headerSize;
 	ENetProtocolHeader* header = (ENetProtocolHeader*)buffer;
 	peerId = ENET_NET_TO_HOST_16 (header->peerID);
 	flags = peerId & ENET_PROTOCOL_HEADER_FLAG_MASK;
 	peerId &= ~ ENET_PROTOCOL_HEADER_FLAG_MASK;
 	headerSize = (flags & ENET_PROTOCOL_HEADER_FLAG_SENT_TIME ? sizeof (ENetProtocolHeader) : (size_t) & ((ENetProtocolHeader *) 0) -> sentTime);
 
-	if(length <  headerSize+sizeof(ENetProtocolCommandHeader))
-		return NULL;
+	return headerSize;
+}
 
+int32 parseEnet(char *buffer, uint32 length, uint8 **dataPointer, uint32 *dataLength, bool *isFragment)
+{
 
-	ENetProtocol *command = (ENetProtocol*)(buffer+headerSize);
-
+	uint32 headerSize = 0;
+	ENetProtocol *command = (ENetProtocol*)buffer;
 	uint8 cmd = command->header.command & ENET_PROTOCOL_COMMAND_MASK;
+
 
 	if((cmd == ENET_PROTOCOL_COMMAND_SEND_RELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE || cmd == ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED))
 	{
@@ -135,17 +135,24 @@ uint8 *parseEnet(char *buffer, uint32 length, uint32 *dataLength, bool *isFragme
 	switch (command->header.command & ENET_PROTOCOL_COMMAND_MASK)
 	{
 		case ENET_PROTOCOL_COMMAND_SEND_RELIABLE:
-			*dataLength = size = ENET_NET_TO_HOST_16(command->sendReliable.dataLength);
-			return (uint8*)command + sizeof(ENetProtocolSendReliable);
+			*dataLength = ENET_NET_TO_HOST_16(command->sendReliable.dataLength);
+			headerSize = sizeof(ENetProtocolSendReliable);
+		break;
 		case ENET_PROTOCOL_COMMAND_SEND_UNRELIABLE:
-			 *dataLength = size = ENET_NET_TO_HOST_16(command->sendUnreliable.dataLength);
-			return (uint8*)command + sizeof(ENetProtocolSendUnreliable);
+			*dataLength = ENET_NET_TO_HOST_16(command->sendUnreliable.dataLength);
+			headerSize = sizeof(ENetProtocolSendUnreliable);
+		break;
 		case ENET_PROTOCOL_COMMAND_SEND_UNSEQUENCED:
-			*dataLength = size = ENET_NET_TO_HOST_16(command->sendUnsequenced.dataLength);
-			return (uint8*)command + sizeof(ENetProtocolSendUnsequenced);
+			*dataLength = ENET_NET_TO_HOST_16(command->sendUnsequenced.dataLength);
+			headerSize = sizeof(ENetProtocolSendUnsequenced);
+		break;
 		case ENET_PROTOCOL_COMMAND_SEND_FRAGMENT:
 			*isFragment = true;
-			return reassemblePacket(command, length, dataLength);
+			*dataLength = ENET_NET_TO_HOST_16(command->sendFragment.dataLength);
+			headerSize = sizeof(ENetProtocolSendFragment);
+			*dataPointer = reassemblePacket(command, length, dataLength);
+		break;
+
 
 		//All enet specefic stuff, so ignore it
 		case ENET_PROTOCOL_COMMAND_ACKNOWLEDGE:
@@ -156,9 +163,18 @@ uint8 *parseEnet(char *buffer, uint32 length, uint32 *dataLength, bool *isFragme
 		case ENET_PROTOCOL_COMMAND_BANDWIDTH_LIMIT:
 		case ENET_PROTOCOL_COMMAND_THROTTLE_CONFIGURE:
 		default:
-			return NULL;
+			return -1;
 	}
-	return NULL;
+	if(headerSize > 0 && !(*isFragment))
+	{
+		*dataPointer = (uint8*)buffer + headerSize;
+		return headerSize + *dataLength;
+	}
+	if((*isFragment) && dataPointer != NULL)
+	{
+		return headerSize + *dataLength;
+	}
+	return -1;
 }
 
 /** IMPORTANT
@@ -204,34 +220,45 @@ int WSAAPI newWSARecvFrom(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount, LPD
 
 	if(returnLength == 0)
 	{
-		bool isFragment = false;
-		uint32 dataLength;
-		uint8 *data = parseEnet(lpBuffers[0].buf, *lpNumberOfBytesRecvd, &dataLength, &isFragment);		
-		if(data != NULL && dataLength > 0)
+		uint32 totalLength = *lpNumberOfBytesRecvd;
+		char *buffer = lpBuffers[0].buf;		
+		uint32 processed;
+			
+		processed = parseHeader(buffer, totalLength);
+		//leagueOfLegends->DbgPrint("Recv, headerSize: %i", processed);
+		while(processed < totalLength)
 		{
-			try
+			uint8 *data = NULL;
+			bool isFragment = false;
+			uint32 dataLength = 0;
+			int32 parsed;
+			
+			parsed = parseEnet(&buffer[processed], totalLength, &data, &dataLength, &isFragment);
+			if(processed == 0 || parsed < 0)
+				break; //Not interesting packet
+
+			processed += parsed;
+			//if(processed <= totalLength)
+			//	leagueOfLegends->DbgPrint("Recv, proccessed: %i, total: %i, dataLength: %i", processed, totalLength, dataLength);
+			if(data != NULL && dataLength > 0)
 			{
-				recvBuf->type = WSARECVFROM;
 				if(isFragment)
 				{
 					MessagePacket *total = (MessagePacket*)data;
+					total->type = WSARECVFROM;
 					if(total->length >= 8)
 						leagueOfLegends->blowfish->Decrypt(total->getData(), total->length-(total->length%8));
 					leagueOfLegends->sendPacket(total);
 				}
 				else
-				{				
+				{
+					recvBuf->type = WSARECVFROM;
 					recvBuf->length = dataLength;
 					memcpy(recvBuf->getData(), data, recvBuf->length);
 					if(recvBuf->length >= 8)
 						leagueOfLegends->blowfish->Decrypt(recvBuf->getData(), recvBuf->length-(recvBuf->length%8));
 					leagueOfLegends->sendPacket(recvBuf);
 				}
-
-			}
-			catch(...)
-			{
-				leagueOfLegends->DbgPrint("Dafuq this bug splat!!!");
 			}
 
 		}
