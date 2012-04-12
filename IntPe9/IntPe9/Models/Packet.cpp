@@ -41,11 +41,12 @@ QString Packet::strInfoHeader()
 	QString out;
 	out += "Packet: ";
 		if(_type == WSASENDTO || _type == WSASEND)
-			out += "Client -> Server";
+			out += "C -> S";
 		else
-			out += "Server -> Client";
+			out += "S -> C";
 
-	out += ", Length: " + QString::number(_length) + "\n"; 
+	out += ", Length: " + QString::number(_length);
+	out += ", Description: " + _description + "\n";
 
 	return out;
 }
