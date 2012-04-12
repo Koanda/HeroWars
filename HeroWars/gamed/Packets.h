@@ -22,6 +22,57 @@ typedef struct _PacketHeader
 	uint16 unk1;	//?
 } PacketHeader;
 
+typedef struct _SynchBlock
+{
+	_SynchBlock()
+	{
+		userId = 0xFFFFFFFFFFFFFFFF;
+		someId = 0;
+		unk2 = unk3 = unk5 = unk6 = 0;
+		unk4 = 0;
+		memset(data1, 0, 64);
+		memset(data2, 0, 64);
+	}
+
+	uint64 userId;
+	uint16 someId;
+	uint32 unk2;
+	uint32 unk3;
+	uint8 unk4;
+	uint32 unk5;     //Often 0x64
+	uint8 data1[64];
+	uint8 data2[64];
+	uint32 unk6;     //Low numbers
+} SynchBlock;
+
+typedef struct _SynchVersionAns
+{
+	_SynchVersionAns()
+	{
+		cmd = PKT_S2C_SynchVersion;
+		unk1 = 0;
+		ok = ok2 = 1;
+		ff = 0xFFFFFFFF;
+		memcpy(version, "Version 1.0.0.136 [PUBLIC]", 27);
+		memset(zero, 0, 2216);
+		end1 = 0xE2E0;
+		end2 = 0xA0;
+	}
+
+	uint8 cmd;
+	uint32 unk1;
+	uint8 ok;
+	uint32 mapId;
+	SynchBlock blocks[12];
+	uint32 ff;              //FFFFFFFF
+	uint8 version[27];      //Ending zero so size 26+0x00
+	uint8 ok2;              //1
+	uint8 unknown[228];     //Really strange shit
+	uint8 zero[2216];
+	uint16 end1;            //0xE2E0
+	uint8 end2;             //0xA0 || 0x08
+} SynchVersionAns;
+
 typedef struct _PingLoadInfo
 {
 	PacketHeader header;
@@ -73,16 +124,14 @@ typedef struct _KeyCheck
 {
 	_KeyCheck()
 	{
-		header.cmd = PKT_KeyCheck;
-		userId = checkId = 0; //memset(testVar, 0, sizeof(testVar));
-		//memset(checkVar, 0, sizeof(checkVar));
-		unk1 = 0;
+		cmd = PKT_KeyCheck;
 	}
 
-	PacketHeader header;
-	uint32 unk1;
-	uint64 userId; //uint8 testVar[8];   //User id + padding
-	uint64 checkId; //uint8 checkVar[8];  //Encrypted testVar
+	uint8 cmd;
+	uint8 partialKey[3];   //Bytes 1 to 3 from the blowfish key for that client
+	uint32 playerId;
+	uint64 userId;         //uint8 testVar[8];   //User id + padding
+	uint64 checkId;        //uint8 checkVar[8];  //Encrypted testVar
 
 	uint8 *pCheckId()
 	{

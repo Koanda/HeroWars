@@ -35,11 +35,8 @@ bool PacketHandler::handleKeyCheck(ENetPeer *peer, ENetPacket *packet)
 	//response.checkId = 5;
 	memcpy(response.pCheckId(), skeleton, 8);
 
-	//unk1 = 0xffffff makes it not work but this beneeth does not change anything...
 	uint8 *key = _blowfish->getKey();
-	response.header.type = key[1];
-	response.header.unk1 = *(uint16*)&key[2];
-	//response.unk1 = 1;
+	memcpy(&response.partialKey[0], &key[1], 3);
 	
 	return sendPacket(peer, reinterpret_cast<uint8*>(&response), sizeof(KeyCheck), 0); //channel 0 check
 }
@@ -335,7 +332,13 @@ bool PacketHandler::handleSynch(ENetPeer *peer, ENetPacket *packet)
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, \
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xe2, \
 		0xa0};
-	return sendPacket(peer, reinterpret_cast<uint8*>(init), sizeof(init), 3); //channel 3 check
+
+	//return sendPacket(peer, reinterpret_cast<uint8*>(init), sizeof(init), 3); //channel 3 check
+	SynchVersionAns answer;
+	answer.mapId = 6;
+	sendPacket(peer, reinterpret_cast<uint8*>(&answer), sizeof(SynchVersionAns), 3);
+
+	return true;
 }
 
 bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)

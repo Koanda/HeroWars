@@ -33,9 +33,13 @@ enum PacketCmd : uint8
 	PKT_C2S_Click = 0xB8,
 	PKT_C2S_AttentionPing = 0x5B,
 	PKT_S2C_AttentionPing = 0x47,
+<<<<<<< HEAD
 	PKT_C2S_Emotion = 0x4D;
 	PKT_S2C_Emotion = 0x49;
 	PKT_C2S_ReqBuyItem = 0x88;
+=======
+	PKT_S2C_SynchVersion = 0x58,
+>>>>>>> 0283c01bc59f6a6269eb13c6f05e0313f150cca7
 
 
 
