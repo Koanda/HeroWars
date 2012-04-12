@@ -118,9 +118,11 @@ copy $(QTDIR)\bin\QtGuid4.dll ..\..\bin\$(Configuration)\</Command>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Debug\moc_Packet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Debug\moc_PacketList.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Debug\moc_qhexedit.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -138,9 +140,11 @@ copy $(QTDIR)\bin\QtGuid4.dll ..\..\bin\$(Configuration)\</Command>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Release\moc_Packet.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Release\moc_PacketList.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\IntPe9\GeneratedFiles\Release\moc_qhexedit.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

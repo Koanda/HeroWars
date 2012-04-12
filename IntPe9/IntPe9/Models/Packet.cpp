@@ -10,6 +10,7 @@ Packet::Packet(MessagePacket *data)
 		_length = data->length;
 		_type = data->type;
 		_data = new QByteArray((const char*)data->getData(), data->length);
+		_description = QString(data->description);
 
 		//Create list view data
 		QString temp;
@@ -89,6 +90,8 @@ QVariant Packet::getField(int column)
 			return getLength();
 		case 2:
 			return getBody();
+		case 3:
+			return _description;
 		default:
 			return QVariant();
 	}

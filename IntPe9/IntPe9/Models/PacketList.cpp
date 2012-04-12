@@ -50,7 +50,7 @@ Packet *PacketList::getPacketAt(int index)
 
 int PacketList::columnCount(const QModelIndex &parent) const
 {
-	return 3;
+	return 4;
 }
 
 int PacketList::rowCount(const QModelIndex &parent) const
@@ -79,6 +79,8 @@ QVariant PacketList::headerData(int section, Qt::Orientation orientation, int ro
 			return QString("Size");
 		case 2:
 			return QString("Data");
+		case 3:
+			return QString("Description");
 		default:
 			return QString();
 	}

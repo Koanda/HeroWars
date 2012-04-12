@@ -43,6 +43,7 @@ class MessagePacket
 {
 public:
 	PacketType type;
+	int8 description[50];
 	uint32 length;
 	uint8 data;
 
@@ -57,63 +58,6 @@ public:
 	}
 };
 
-class RawPacket
-{
-#define PACKET_HEADER			8
-
-public:
-	PacketType type;		//4
-	uint16 length;			//2
-	uint16 cmd;			//2
-	uint8 packet[];
-
-	static RawPacket *createPacket(unsigned int length)
-	{
-		RawPacket *packet = (RawPacket*)malloc(length + PACKET_HEADER);
-		packet->length = length;
-		packet->cmd = 0;
-		return packet;
-	}
-
-	static RawPacket *createPacket(unsigned int length, uint8 *buffer)
-	{
-		RawPacket *packet = createPacket(length);
-		memcpy((char*)packet->packet, (char*)buffer, length);
-		return packet;
-	}
-
-	static RawPacket *createPacket(unsigned int length, uint8 *buffer, PacketType type)
-	{
-		RawPacket *packet = createPacket(length, buffer);
-		packet->type = type;
-		return packet;
-	}
-
-	static RawPacket *createPacket(unsigned int length, uint8 *buffer, PacketType type, uint16 cmd)
-	{
-		RawPacket *packet = createPacket(length, buffer, type);
-		packet->cmd = cmd;
-		return packet;
-	}
-
-	static bool destroyPacket(RawPacket *packet)
-	{
-		try
-		{
-			free(packet);
-			return true;
-		}
-		catch(...)
-		{
-			return false;
-		}
-	}
-
-	unsigned int getRawLength()
-	{
-		return length + PACKET_HEADER;
-	}
-};
 #pragma warning(pop)
 #pragma pack(pop)
 

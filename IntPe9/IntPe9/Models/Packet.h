@@ -30,6 +30,7 @@ public:
 
 private:
 	//Data
+	QString _description;
 	uint32 _length;
 	PacketType _type;
 	QByteArray *_data;

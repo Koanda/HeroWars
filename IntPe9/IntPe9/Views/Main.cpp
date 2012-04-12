@@ -21,7 +21,7 @@ MainGui::MainGui(QWidget *parent, Qt::WFlags flags)
 	_mainView.packetList->horizontalHeader()->setResizeMode(QHeaderView::Fixed);
 	_mainView.packetList->horizontalHeader()->resizeSection(0, 30);
 	_mainView.packetList->horizontalHeader()->resizeSection(1, 50);
-	//_mainView.packetList->horizontalHeader()->resizeSection(3, 100);
+	_mainView.packetList->horizontalHeader()->resizeSection(2, 420);
 
 	connect(_mainView.actionAbout, SIGNAL(triggered()), _aboutGui, SLOT(slotShow()) );
 	connect(_mainView.actionSavePackets, SIGNAL(triggered()), this, SLOT(saveAllAsText()) );

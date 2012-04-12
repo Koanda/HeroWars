@@ -90,7 +90,10 @@ uint8 *reassemblePacket(ENetProtocol *command, uint32 length, uint32 *dataLength
 
 	//If reassembled, return data, else NULL
 	if(fragmentNumber == fragmentCount-1)
+	{
+		sprintf_s(&packet->description[0], 50, "CMD: 8, Channel: %i, Reassembled", command->header.channelID);
 		return (uint8*)packet;
+	}
 	else
 		return NULL;
 }
@@ -107,7 +110,7 @@ uint32 parseHeader(char *buffer, uint32 length)
 	return headerSize;
 }
 
-int32 parseEnet(char *buffer, uint32 length, uint8 **dataPointer, uint32 *dataLength, bool *isFragment)
+int32 parseEnet(char *buffer, uint32 length, uint8 **dataPointer, uint32 *dataLength, bool *isFragment, MessagePacket *packet)
 {
 
 	uint32 headerSize = 0;
@@ -132,6 +135,7 @@ int32 parseEnet(char *buffer, uint32 length, uint8 **dataPointer, uint32 *dataLe
 		}
 
 		leagueOfLegends->DbgPrint("[RECV] Parse, cmd: %i, channel: %i, size: %i", cmd, command->header.channelID, maLen);
+		sprintf_s(&packet->description[0], 50, "CMD: %i, Channel: %i", cmd, command->header.channelID);
 	}
 
 	switch (command->header.command & ENET_PROTOCOL_COMMAND_MASK)
@@ -200,6 +204,7 @@ int WSAAPI newWSASendTo(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount, LPDWO
 				continue;
 
 			leagueOfLegends->DbgPrint("[SEND] Parse, cmd: %i, channel: %i, size: %i", cmd, command->header.channelID, lpBuffers[i+1].len);
+			sprintf_s(&sendBuf->description[0], 50, "CMD: %i, Channel: %i", cmd, command->header.channelID);
 		
 			sendBuf->type = WSASENDTO;
 			sendBuf->length = lpBuffers[i+1].len;
@@ -235,7 +240,7 @@ int WSAAPI newWSARecvFrom(SOCKET s, LPWSABUF lpBuffers, DWORD dwBufferCount, LPD
 			uint32 dataLength = 0;
 			int32 parsed;
 			
-			parsed = parseEnet(&buffer[processed], totalLength, &data, &dataLength, &isFragment);
+			parsed = parseEnet(&buffer[processed], totalLength, &data, &dataLength, &isFragment, recvBuf);
 			if(processed == 0 || parsed < 0)
 				break; //Not interesting packet
 
