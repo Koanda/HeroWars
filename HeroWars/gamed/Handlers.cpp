@@ -333,12 +333,12 @@ bool PacketHandler::handleSynch(ENetPeer *peer, ENetPacket *packet)
 		0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xe2, \
 		0xa0};
 
-	//return sendPacket(peer, reinterpret_cast<uint8*>(init), sizeof(init), 3); //channel 3 check
-	SynchVersionAns answer;
+	return sendPacket(peer, reinterpret_cast<uint8*>(init), sizeof(init), 3); //channel 3 check
+	/*SynchVersionAns answer;
 	answer.mapId = 6;
 	sendPacket(peer, reinterpret_cast<uint8*>(&answer), sizeof(SynchVersionAns), 3);
 
-	return true;
+	return true;*/
 }
 
 bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)
