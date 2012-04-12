@@ -28,21 +28,23 @@ typedef struct _SynchBlock
 	{
 		userId = 0xFFFFFFFFFFFFFFFF;
 		someId = 0;
-		unk2 = unk3 = unk5 = unk6 = 0;
-		unk4 = 0;
+		unk1 = unk2 = 0;
+		flag = 0; //1 for bot?
 		memset(data1, 0, 64);
 		memset(data2, 0, 64);
+		unk3 = 0xFFFFFFFF;
 	}
 
 	uint64 userId;
 	uint16 someId;
-	uint32 unk2;
-	uint32 unk3;
-	uint8 unk4;
-	uint32 unk5;     //Often 0x64
+	uint32 skill1;
+	uint32 skill2;
+	uint8 flag;
+	uint32 unk1;     //Often 0x64
 	uint8 data1[64];
 	uint8 data2[64];
-	uint32 unk6;     //Low numbers
+	uint32 unk2;     //Low numbers
+	uint32 unk3;
 } SynchBlock;
 
 typedef struct _SynchVersionAns
@@ -52,9 +54,9 @@ typedef struct _SynchVersionAns
 		cmd = PKT_S2C_SynchVersion;
 		unk1 = 0;
 		ok = ok2 = 1;
-		ff = 0xFFFFFFFF;
 		memcpy(version, "Version 1.0.0.136 [PUBLIC]", 27);
-		memset(zero, 0, 2216);
+		memcpy(gameMode, "CLASSIC", 8);
+		memset(zero, 0, 2232);
 		end1 = 0xE2E0;
 		end2 = 0xA0;
 	}
@@ -63,12 +65,12 @@ typedef struct _SynchVersionAns
 	uint32 unk1;
 	uint8 ok;
 	uint32 mapId;
-	SynchBlock blocks[12];
-	uint32 ff;              //FFFFFFFF
+	SynchBlock players[12];
 	uint8 version[27];      //Ending zero so size 26+0x00
 	uint8 ok2;              //1
 	uint8 unknown[228];     //Really strange shit
-	uint8 zero[2216];
+	uint8 gameMode[8];
+	uint8 zero[2232];
 	uint16 end1;            //0xE2E0
 	uint8 end2;             //0xA0 || 0x08
 } SynchVersionAns;
@@ -129,7 +131,7 @@ typedef struct _KeyCheck
 
 	uint8 cmd;
 	uint8 partialKey[3];   //Bytes 1 to 3 from the blowfish key for that client
-	uint32 playerId;
+	uint32 netId;
 	uint64 userId;         //uint8 testVar[8];   //User id + padding
 	uint64 checkId;        //uint8 checkVar[8];  //Encrypted testVar
 

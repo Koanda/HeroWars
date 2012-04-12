@@ -15,7 +15,6 @@ typedef unsigned long long uint64;
 enum PacketCmd : uint8
 {
 	PKT_KeyCheck = 0x00,
-
 	PKT_S2C_QueryStatusAns = 0x8e,
 	PKT_World_SendGameNumber = 0x99,
 	PKT_C2S_QueryStatusReq = 0x17,
@@ -36,20 +35,14 @@ enum PacketCmd : uint8
 	PKT_C2S_Emotion = 0x4D,
 	PKT_S2C_Emotion = 0x49,
 	PKT_C2S_ReqBuyItem = 0x88,
-    PKT_C2S_SkillUp = 0x3E,
-    PKT_S2S_SkillUp = 0x18,
-    PKT_C2S_OpenShop = 0x61,
-    PKT_C2S_PlayerMove = 0x76,
-
+	PKT_C2S_SkillUp = 0x3E,
+	PKT_S2S_SkillUp = 0x18,
+	PKT_C2S_OpenShop = 0x61,
+	PKT_C2S_PlayerMove = 0x76,
 	PKT_S2C_SynchVersion = 0x58,
-
-
-
 	PKT_SpawnStart = 0x67,
 	PKT_LoadName = 0x66,
 	PKT_LoadType = 0x65,
-
-	TOTAL_NUM = 0xff,
 };
 
 #endif
