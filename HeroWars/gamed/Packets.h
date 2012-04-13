@@ -90,25 +90,57 @@ typedef struct _PingLoadInfo
 
 uint8 *createDynamicPacket(uint8 *str, uint32 size);
 
-typedef struct _SpawnPacket
+typedef struct _LoadScreenInfo
 {
-	static _SpawnPacket* create(PacketCmd cmd, int8 *str, uint32 size)
+	_LoadScreenInfo()
 	{
-		uint32 totalSize = sizeof(_SpawnPacket)+size+1;
+		//Zero this complete buffer
+		memset(this, 0, sizeof(_LoadScreenInfo));
+
+		cmd = PKT_S2C_LoadScreenInfo;
+		unk1 = unk2 = 6;		
+	}
+
+	uint32 cmd;
+	uint32 unk1; //6 in both cases
+	uint32 unk2; //""
+	uint32 unk3;
+	uint64 bluePlayerIds[6]; //Team 1, 6 players max
+	uint8 blueData[144];
+	uint64 redPlayersIds[6]; //Team 2, 6 players max
+	uint8 redData[144];
+	uint32 bluePlayerNo;
+	uint32 redPlayerNo;
+} LoadScreenInfo;
+
+typedef struct _LoadScreenPlayer
+{
+	static _LoadScreenPlayer* create(PacketCmd cmd, int8 *str, uint32 size)
+	{
+		//Buils packet buffer
+		uint32 totalSize = sizeof(_LoadScreenPlayer)+size+1;
 		uint8* buf = new uint8[totalSize];
 		memset(buf, 0, totalSize);
 
-		_SpawnPacket *type = (_SpawnPacket *)buf;
-		type->header.cmd = cmd;
-		type->length = size;
-		memcpy(type->getDescription(), str, type->length);
-		return type;
+		//Set defaults
+		_LoadScreenPlayer *packet = (_LoadScreenPlayer *)buf;
+		packet->cmd = cmd;
+		packet->length = size;
+		packet->unk1 = 0;
+		packet->skinId = 0;
+		memcpy(packet->getDescription(), str, packet->length);
+		return packet;
 	}
 
-	PacketHeader header;
+	static void destroy(_LoadScreenPlayer *packet)
+	{
+		delete [](uint8*)packet;
+	}
+
+	uint32 cmd;
 	uint32 unk1;
 	uint64 userId;
-	uint32 unk2;
+	uint32 skinId;
 	uint32 length;
 	uint8 description;
 	uint8 *getDescription()
@@ -118,9 +150,9 @@ typedef struct _SpawnPacket
 
 	uint32 getPacketLength()
 	{
-		return sizeof(_SpawnPacket)+length;
+		return sizeof(_LoadScreenPlayer)+length;
 	}
-} SpawnPacket;
+} LoadScreenPlayer;
 
 
 typedef struct _KeyCheck
@@ -128,6 +160,9 @@ typedef struct _KeyCheck
 	_KeyCheck()
 	{
 		cmd = PKT_KeyCheck;
+		netId = 0;
+		checkId = 0;
+
 	}
 
 	uint8 cmd;
@@ -135,11 +170,6 @@ typedef struct _KeyCheck
 	uint32 netId;
 	uint64 userId;         //uint8 testVar[8];   //User id + padding
 	uint64 checkId;        //uint8 checkVar[8];  //Encrypted testVar
-
-	uint8 *pCheckId()
-	{
-		return reinterpret_cast<uint8*>((reinterpret_cast<uint64*>(&checkId)));
-	}
 } KeyCheck;
 
 typedef struct _AttentionPing
@@ -179,6 +209,7 @@ typedef struct _AttentionPingAns
 	AttentionPing attentionPing;
 	uint32 response;
 } AttentionPingAns;
+
 typedef struct _ViewReq
 {
 	uint8 cmd;
@@ -262,8 +293,8 @@ typedef struct _SynchVersion
 	uint8 version[27];
 	uint32 unk2;
 	uint32 unk3;
-
 } SynchVersion;
+
 typedef struct _WorldSendGameNumber
 {
 	_WorldSendGameNumber()
