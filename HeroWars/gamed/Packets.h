@@ -337,6 +337,33 @@ typedef struct _HeroSpawnPacket
 	
 } HeroSpawnPacket;
 
+typedef struct _SkillUpPacket
+{
+	
+	PacketHeader header;
+	uint8 unk;
+	uint8 skill;
+	
+	
+} SkillUpPacket;
+
+typedef struct _SkillUpResponse
+{
+	_SkillUpResponse()
+	{
+		header.cmd = PKT_S2C_SkillUp;
+		header.type = 0x19;
+		unk = 0x40;
+		level = 0x0000;
+	}
+	PacketHeader header;
+	uint8 unk;
+	uint8 skill;
+	uint16 level; //?
+	
+	
+} SkillUpResponse;
+
 #if defined( __GNUC__ )
 #pragma pack()
 #else
