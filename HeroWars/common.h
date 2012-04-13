@@ -38,11 +38,12 @@ enum PacketCmd : uint8
 	PKT_C2S_SkillUp = 0x3E,
 	PKT_S2S_SkillUp = 0x18,
 	PKT_C2S_OpenShop = 0x61,
-	PKT_C2S_PlayerMove = 0x76,
+	PKT_C2S_MoveReq = 0x76,
 	PKT_S2C_SynchVersion = 0x58,
 	PKT_SpawnStart = 0x67,
 	PKT_LoadName = 0x66,
 	PKT_LoadType = 0x65,
+	//Game Starting is 0x2E btw...
 };
 
 #endif

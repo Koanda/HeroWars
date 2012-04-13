@@ -12,6 +12,7 @@ const PacketTable table[] =
 	{PKT_C2S_Loaded,                 &PacketHandler::handleInit                 },
 	{PKT_C2S_Exit,                   &PacketHandler::handleNull                 },
 	{PKT_C2S_ViewReq,                &PacketHandler::handleView                 },
+	{PKT_C2S_MoveReq,                &PacketHandler::handleMove                 },
 	{PKT_C2S_Click,                  &PacketHandler::handleNull                 },
 	{PKT_C2S_AttentionPing,          &PacketHandler::handleAttentionPing        },
 };

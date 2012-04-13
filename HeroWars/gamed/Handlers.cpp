@@ -362,6 +362,14 @@ bool PacketHandler::handleView(ENetPeer *peer, ENetPacket *packet)
 	return sendPacket(peer, reinterpret_cast<uint8*>(&answer), sizeof(ViewAns), 3, UNRELIABLE);
 }
 
+bool PacketHandler::handleMove(ENetPeer *peer, ENetPacket *packet)
+{
+	MoveReq *request = reinterpret_cast<MoveReq*>(packet->data);
+
+	Log::getMainInstance()->writeLine("Move to: x(left->right):%f, y(height):%f, z(bot->top): %f\n", request->x1, request->y1, request->z1);
+	return true;
+}
+
 bool PacketHandler::handleLoadPing(ENetPeer *peer, ENetPacket *packet)
 {
 	PingLoadInfo *loadInfo = reinterpret_cast<PingLoadInfo*>(packet->data);
