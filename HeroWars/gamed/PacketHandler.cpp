@@ -1,31 +1,34 @@
 #include "PacketHandler.h"
 
-const PacketTable table[] =
-{
-	{PKT_KeyCheck,                   &PacketHandler::handleKeyCheck             },
-	{PKT_C2S_Ping_Load_Info,         &PacketHandler::handleLoadPing             },
-	{PKT_C2S_CharLoaded,             &PacketHandler::handleSpawn                },
-	{PKT_C2S_ClientReady,            &PacketHandler::handleMap                  },
-	{PKT_C2S_SynchVersion,           &PacketHandler::handleSynch                },
-	{PKT_C2S_GameNumberReq,          &PacketHandler::handleGameNumber           },
-	{PKT_C2S_QueryStatusReq,         &PacketHandler::handleQueryStatus          },
-	{PKT_C2S_Loaded,                 &PacketHandler::handleInit                 },
-	{PKT_C2S_Exit,                   &PacketHandler::handleNull                 },
-	{PKT_C2S_ViewReq,                &PacketHandler::handleView                 },
-	{PKT_C2S_MoveReq,                &PacketHandler::handleMove                 },
-	{PKT_C2S_Click,                  &PacketHandler::handleNull                 },
-	{PKT_C2S_AttentionPing,          &PacketHandler::handleAttentionPing        },
-};
 
 PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)
 {
 	_server = server;
 	_blowfish = blowfish;
+	memset(_handlerTable,0,sizeof(_handlerTable));
+	registerHandler(&PacketHandler::handleKeyCheck,PKT_KeyCheck,CHL_HANDSHAKE);
+	registerHandler(&PacketHandler::handleLoadPing,PKT_C2S_Ping_Load_Info,CHL_C2S);
+	registerHandler(&PacketHandler::handleSpawn,PKT_C2S_CharLoaded,CHL_C2S);
+	registerHandler(&PacketHandler::handleMap,PKT_C2S_ClientReady,CHL_LOADING_SCREEN);
+	registerHandler(&PacketHandler::handleSynch,PKT_C2S_SynchVersion,CHL_C2S);
+	registerHandler(&PacketHandler::handleGameNumber,PKT_C2S_GameNumberReq,CHL_C2S);
+	registerHandler(&PacketHandler::handleQueryStatus,PKT_C2S_QueryStatusReq,CHL_C2S);
+	registerHandler(&PacketHandler::handleInit,PKT_C2S_Loaded,CHL_C2S);
+	registerHandler(&PacketHandler::handleNull,PKT_C2S_Exit,CHL_C2S);
+	registerHandler(&PacketHandler::handleView,PKT_C2S_ViewReq,CHL_C2S);
+	registerHandler(&PacketHandler::handleNull,PKT_C2S_Click,CHL_C2S);
+	registerHandler(&PacketHandler::handleAttentionPing,PKT_C2S_AttentionPing,CHL_C2S);
+	registerHandler(&PacketHandler::handleChatBoxMessage ,PKT_ChatBoxMessage,CHL_COMMUNICATION);
 }
 
 PacketHandler::~PacketHandler()
 {
+	memset(_handlerTable,0,sizeof(_handlerTable)); //i prefer cleaning everything
+}
 
+void PacketHandler::registerHandler(bool (PacketHandler::*handler)(HANDLE_ARGS), PacketCmd pktcmd,Channel c)
+{
+	_handlerTable[pktcmd][c] = handler;
 }
 
 void PacketHandler::printPacket(uint8 *buf, uint32 len)
@@ -79,7 +82,7 @@ bool PacketHandler::broadcastPacket(uint8 *data, uint32 length, uint8 channelNo,
 	return true;
 }
 
-bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
+bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet, uint8 channelID)
 {
 	if(packet->dataLength >= 8)
 	{
@@ -87,23 +90,16 @@ bool PacketHandler::handlePacket(ENetPeer *peer, ENetPacket *packet)
 			_blowfish->Decrypt(packet->data, packet->dataLength-(packet->dataLength%8)); //Encrypt everything minus the last bytes that overflow the 8 byte boundary
 	}
 
-	PacketHeader *header = reinterpret_cast<PacketHeader*>(packet->data);
-
-	bool handled = false;
-
-	for(uint32 i = 0; i < TOTAL_HANDLERS; ++i)
+	PacketHeader *header = reinterpret_cast<PacketHeader*>(packet->data);	
+	bool (PacketHandler::*handler)(HANDLE_ARGS) = _handlerTable[header->cmd][channelID];
+	
+	if(handler)
 	{
-		if(table[i].cmd == header->cmd)
-		{
-			handled = true;
-			return (*this.*table[i].handler)(peer, packet);
-		}
+		return (*this.*handler)(peer,packet);
 	}
-
-	if(!handled)
+	else
 	{
-		PDEBUG_LOG_LINE(Log::getMainInstance(),"Unknown packet: %X(%i)\n", header->cmd, header->cmd);
+		PDEBUG_LOG_LINE(Log::getMainInstance(),"Unknown packet: CMD %X(%i) CHANNEL %X(%i)\n", header->cmd, header->cmd,channelID,channelID);
 	}
-
-	return handled;
+	return false;	
 }
