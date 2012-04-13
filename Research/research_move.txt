@@ -1,0 +1,94 @@
+In this example I tried to move the champion to the right (clicked very often):
+What the coordinates can be?
+Point1->Point2
+Point1->Value To...
+Point2->Value From...
+###################################################################
+MOVE:
+76 = CMD
+
+Command 1:
+	19 00 00 40 02 = CMD
+	95 ae 55 43 = coordinate | datatype = double?  || current posses?
+	08 75 2f 43 = coordinate
+	6a 3c a0 43 = coordinate
+
+00 00 00 00 = Padding
+30 eb 02 00 = Unknown
+
+Command 2:
+	19 00 00 40 03 = CMD
+	6b f2 = coordinate | datatype = float?  || changing values to point??
+	6e f2 = coordinate
+	59 17 = coordinate
+###################################################################
+Command 1:
+95 ae 55 43 | (Little endian!!!)
+60 e5 81 43 | + 2C 36 CB |
+bb 7e a1 43 | + 1F 99 5B  \
+fe 87 f9 43 | + 58 09 43   > HEAVY DIFFERENCE          || X coordinate "going right"
+ce 83 11 44 | + 17 FB D0  /
+46 68 31 44 | + 1F 47 78 |
+
+08 75 2f 43 | 
+00 75 2f 43 | =             |
+08 75 2f 43 | =              > QUITE LESS DIFFERENCE
+08 be 2c 43 | -             |                          || Y-coordinate "going downstairs maybe?"
+a0 f9 27 43 | --             > A LOT DIFFERENCE!!!
+00 51 19 43 | ---           |
+
+6a 3c a0 43 |               
+cc 82 9d 43 | -             |
+0c 6b 9e 43 | +              \
+0a 35 a2 43 | +               > ALMOST NO DIFFERENCE!  || Z-coordinate "tried to keep constant"
+f6 82 aa 43 | +              /
+52 71 ae 43 | +             |
+###################################################################
+Command 2:
+6b f2 | 
+98 f2 | + 2D
+b6 f2 | +
+fa f2 | +               > + a lot  || Y coordinate "moved fast" 8-)
+2e f3 | +
+6a f3 | +
+
+6e f2 |
+7a f2 | + 02
+7e f2 | + 04
+83 f2 | + 04            > + a little bit  || X-coordinate "failed keeping constant" :D
+86 f2 | + 03
+8e f2 | + 08
+
+59 17 |
+43 09 | ---
+44 05 | --
+59 04 | -
+4e 0a | ++
+52 05 | --
+###################################################################
+The real receives:
+
+76 19 00 00 40 02 95 ae 55 43 08 75 2f 43 6a 3c 
+a0 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 6b 
+f2 6e f2 59 17  
+
+76 19 00 00 40 02 60 e5 81 43 00 75 2f 43 cc 82 
+9d 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 98 
+f2 7a f2 43 09            
+      
+76 19 00 00 40 02 bb 7e a1 43 08 75 2f 43 0c 6b 
+9e 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 b6 
+f2 7e f2 44 05            
+       
+76 19 00 00 40 02 fe 87 f9 43 08 be 2c 43 0a 35 
+a2 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 fa 
+f2 83 f2 59 04  
+
+76 19 00 00 40 02 ce 83 11 44 a0 f9 27 43 f6 82 
+aa 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 2e 
+f3 86 f2 4e 0a  
+
+76 19 00 00 40 02 46 68 31 44 00 51 19 43 52 71 
+ae 43 00 00 00 00 30 eb 02 00 19 00 00 40 03 6a 
+f3 8e f2 52 05            
+      
