@@ -8,7 +8,7 @@ PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)
 	memset(_handlerTable,0,sizeof(_handlerTable));
 	registerHandler(&PacketHandler::handleKeyCheck,PKT_KeyCheck,CHL_HANDSHAKE);
 	registerHandler(&PacketHandler::handleLoadPing,PKT_C2S_Ping_Load_Info,CHL_C2S);
-	registerHandler(&PacketHandler::handleSpawn,PKT_C2S_CharLoaded,CHL_C2S);
+	registerHandler(&PacketHandler::handleSpawn,PKT_C2S_CharLoaded,CHL_C2S); //check behaviour with multiple players, ATM game starting when 1st playe is ready(?) .ltsstar
 	registerHandler(&PacketHandler::handleMap,PKT_C2S_ClientReady,CHL_LOADING_SCREEN);
 	registerHandler(&PacketHandler::handleSynch,PKT_C2S_SynchVersion,CHL_C2S);
 	registerHandler(&PacketHandler::handleGameNumber,PKT_C2S_GameNumberReq,CHL_C2S);
