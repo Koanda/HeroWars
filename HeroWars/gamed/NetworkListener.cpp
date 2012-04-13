@@ -49,8 +49,8 @@ void NetworkListener::netLoop()
 				event.peer->mtu = PEER_MTU;
 
 				event.peer->data = new ClientInfo();
-				peerInfo(event.peer)->setName("FuckYeah");
-				peerInfo(event.peer)->setType("Annie");
+				peerInfo(event.peer)->setName("IMxHot");
+				peerInfo(event.peer)->setType("Ahri");
 
 			break;
 
