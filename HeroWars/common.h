@@ -45,6 +45,7 @@ enum PacketCmd : uint8
 	PKT_LoadName = 0x66,
 	PKT_LoadType = 0x65,
 	PKT_ChatBoxMessage = 0x00,
+	PKT_HeroSpawn = 0xFF,
 
 	//Game Starting is 0x2E btw...
 };
