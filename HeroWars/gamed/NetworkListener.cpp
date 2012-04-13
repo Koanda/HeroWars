@@ -55,7 +55,7 @@ void NetworkListener::netLoop()
 			break;
 
 		case ENET_EVENT_TYPE_RECEIVE:
-			if(!_handler->handlePacket(event.peer, event.packet))
+			if(!_handler->handlePacket(event.peer, event.packet,event.channelID))
 			{
 				//enet_peer_disconnect(event.peer, 0);
 			}

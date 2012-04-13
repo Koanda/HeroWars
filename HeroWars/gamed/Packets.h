@@ -3,6 +3,7 @@
 
 #include <enet/enet.h>
 #include "common.h"
+#include "ChatBox.h"
 
 #if defined( __GNUC__ )
 #pragma pack(1)
@@ -259,6 +260,13 @@ typedef struct _WorldSendGameNumber
 	uint64 gameId;
 	uint8 data[0x80];
 } WorldSendGameNumber;
+
+typedef struct _ChatBoxMessage
+{
+	PacketHeader header;
+	ChatMessageType cmd;
+	uint32 msgLength;	
+} ChatBoxMessage;
 
 #if defined( __GNUC__ )
 #pragma pack()

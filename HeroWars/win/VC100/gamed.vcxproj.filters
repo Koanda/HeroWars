@@ -51,5 +51,8 @@
     <ClInclude Include="..\..\gamed\Packets.h">
       <Filter>Protocol</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\gamed\ChatBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
