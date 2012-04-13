@@ -396,3 +396,16 @@ bool PacketHandler::handleChatBoxMessage(HANDLE_ARGS)
 	}
 	return false;
 }
+
+bool PacketHandler::handleSkillUp(HANDLE_ARGS) {
+
+	SkillUpPacket* skillUpPacket = reinterpret_cast<SkillUpPacket*>(packet->data);
+	//!TODO Check if can up skill? :)
+	SkillUpResponse skillUpResponse;
+	
+	skillUpResponse.skill = skillUpPacket->skill;
+	skillUpResponse.level = 0x0001;
+
+	return sendPacket(peer, reinterpret_cast<uint8*>(&skillUpResponse),sizeof(skillUpResponse),CHL_GAMEPLAY);
+
+}

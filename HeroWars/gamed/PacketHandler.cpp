@@ -20,6 +20,7 @@ PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)
 	registerHandler(&PacketHandler::handleAttentionPing,PKT_C2S_AttentionPing,CHL_C2S);
 	registerHandler(&PacketHandler::handleChatBoxMessage ,PKT_ChatBoxMessage,CHL_COMMUNICATION);
 	registerHandler(&PacketHandler::handleMove, PKT_C2S_MoveReq, CHL_C2S);
+	registerHandler(&PacketHandler::handleSkillUp, PKT_C2S_SkillUp, CHL_C2S);
 }
 
 PacketHandler::~PacketHandler()
