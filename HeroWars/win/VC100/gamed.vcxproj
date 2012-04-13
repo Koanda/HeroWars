@@ -103,6 +103,7 @@
     <ClCompile Include="..\..\gamed\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\gamed\ChatBox.h" />
     <ClInclude Include="..\..\gamed\NetworkListener.h" />
     <ClInclude Include="..\..\common.h" />
     <ClInclude Include="..\..\gamed\Log.h" />

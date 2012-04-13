@@ -12,6 +12,7 @@ typedef unsigned short uint16;
 typedef unsigned int uint32;
 typedef unsigned long long uint64; 
 
+#define PKT_MAX = 0x100
 enum PacketCmd : uint8
 {
 	PKT_KeyCheck = 0x00,
@@ -36,14 +37,28 @@ enum PacketCmd : uint8
 	PKT_S2C_Emotion = 0x49,
 	PKT_C2S_ReqBuyItem = 0x88,
 	PKT_C2S_SkillUp = 0x3E,
-	PKT_S2S_SkillUp = 0x18,
+    PKT_S2C_SkillUp = 0x18,
 	PKT_C2S_OpenShop = 0x61,
 	PKT_C2S_MoveReq = 0x76,
 	PKT_S2C_SynchVersion = 0x58,
 	PKT_SpawnStart = 0x67,
 	PKT_LoadName = 0x66,
 	PKT_LoadType = 0x65,
+	PKT_ChatBoxMessage = 0x00,
+	PKT_HeroSpawn = 0xFF,
+
 	//Game Starting is 0x2E btw...
 };
 
+#define CHL_MAX = 7
+enum Channel : uint8
+{
+	CHL_HANDSHAKE = 0,
+	CHL_C2S = 1,
+	CHL_GAMEPLAY =2,
+	CHL_S2C = 3,
+	CHL_LOW_PRIORITY = 4,
+	CHL_COMMUNICATION = 5,
+	CHL_LOADING_SCREEN = 6,
+};
 #endif
