@@ -393,6 +393,7 @@ bool PacketHandler::handleQueryStatus(HANDLE_ARGS)
 bool PacketHandler::handleChatBoxMessage(HANDLE_ARGS)
 {
 	ChatBoxMessage* message = reinterpret_cast<ChatBoxMessage*>(packet->data);
+
 	switch(message->cmd)
 	{
 	case CMT_ALL:
