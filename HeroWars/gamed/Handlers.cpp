@@ -60,8 +60,8 @@ bool PacketHandler::handleSynch(ENetPeer *peer, ENetPacket *packet)
 	answer.mapId = 1;
 	//exhaust = 0x08A8BAE4, Cleanse = 0x064D2094, flash = 0x06496EA8
 	answer.players[0].userId = peerInfo(peer)->userId;
-	answer.players[0].skill1 = 0x08A8BAE4;
-	answer.players[0].skill2 = 0x064D2094;
+	answer.players[0].skill1 = SPL_Exhaust;
+	answer.players[0].skill2 = SPL_Cleanse;
 
 	sendPacket(peer, reinterpret_cast<uint8*>(&answer), sizeof(SynchVersionAns), 3);
 

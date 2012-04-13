@@ -22,7 +22,7 @@ enum PacketCmd : uint8
 	PKT_C2S_SynchVersion = 0xc6,
 	PKT_C2S_CharLoaded = 0xc7,
 	PKT_C2S_Exit = 0x95,
-	PKT_C2S_ClientReady = 0x64,
+	PKT_C2S_ClientReady = 0x64,  //ready for loading!!!
 	PKT_C2S_GameNumberReq = 0xA5,
 	PKT_C2S_Ping_Load_Info = 0x19,
 	PKT_S2C_Ping_Load_Info = 0x9E,
@@ -60,5 +60,11 @@ enum Channel : uint8
 	CHL_LOW_PRIORITY = 4,
 	CHL_COMMUNICATION = 5,
 	CHL_LOADING_SCREEN = 6,
+};
+
+enum Spell : uint32
+{
+	SPL_Exhaust = 0x08A8BAE4,
+	SPL_Cleanse = 0x064D2094,
 };
 #endif
