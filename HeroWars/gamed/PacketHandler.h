@@ -9,6 +9,7 @@
 #include <intlib/base64.h>
 #include <intlib/blowfish.h>
 
+
 #include "Packets.h"
 #include "Client.h"
 
@@ -36,6 +37,7 @@ class PacketHandler
 		bool handleQueryStatus(HANDLE_ARGS);
 		bool handleInit(HANDLE_ARGS);
 		bool handleView(HANDLE_ARGS);
+		bool handleMove(HANDLE_ARGS);
 		bool handleAttentionPing(HANDLE_ARGS);
 		bool handleChatBoxMessage(HANDLE_ARGS);
 

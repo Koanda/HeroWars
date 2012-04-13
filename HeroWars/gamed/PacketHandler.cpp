@@ -1,5 +1,6 @@
 #include "PacketHandler.h"
 
+
 PacketHandler::PacketHandler(ENetHost *server, BlowFish *blowfish)
 {
 	_server = server;

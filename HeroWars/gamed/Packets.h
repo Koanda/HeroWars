@@ -193,6 +193,25 @@ typedef struct _ViewReq
 	uint8 requestNo;
 } ViewReq;
 
+typedef struct _MoveReq
+{
+	uint8 cmd;
+	uint8 sub_cmd1;
+	uint16 sub_cmd1Pad; //padding
+	uint16 sub_cmd1Def; // defintion of cmd
+	float x1;
+	float y1;
+	float z1;
+	uint32 pad2; //padding
+	uint32 unk1; //Unk
+	uint8 sub_cmd2;
+	uint16 sub_cmd2Pad; //padding
+	uint16 sub_cmd2Def; // definition of cmd
+	short x2; // I don't get that shit
+	short y2; // -||-
+	short z2; // -||-
+} MoveReq;
+
 typedef struct _ViewAns
 {
 	_ViewAns()
