@@ -36,7 +36,7 @@ enum PacketCmd : uint8
 	PKT_S2C_Emotion = 0x49,
 	PKT_C2S_ReqBuyItem = 0x88,
 	PKT_C2S_SkillUp = 0x3E,
-	PKT_S2S_SkillUp = 0x18,
+    PKT_S2C_SkillUp = 0x18,
 	PKT_C2S_OpenShop = 0x61,
 	PKT_C2S_MoveReq = 0x76,
 	PKT_S2C_SynchVersion = 0x58,
