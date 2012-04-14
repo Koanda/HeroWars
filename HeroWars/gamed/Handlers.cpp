@@ -63,7 +63,7 @@ bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)
 
 	LoadScreenPlayer *playerHero = LoadScreenPlayer::create(PKT_S2C_LoadHero,  peerInfo(peer)->type, peerInfo(peer)->typeLen);
 	playerHero->userId = peerInfo(peer)->userId;
-	playerHero->skinId = 2;
+	playerHero->skinId = 4;
 
 	//Builds team info
 	LoadScreenInfo screenInfo;
@@ -77,6 +77,8 @@ bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)
 	//For all players send this info
 	bool pName = sendPacket(peer, reinterpret_cast<uint8*>(playerName), playerName->getPacketLength(), CHL_LOADING_SCREEN);
 	bool pHero = sendPacket(peer, reinterpret_cast<uint8*>(playerHero), playerHero->getPacketLength(), CHL_LOADING_SCREEN);
+
+	//cleanup
 	LoadScreenPlayer::destroy(playerName);
 	LoadScreenPlayer::destroy(playerHero);
 
@@ -84,6 +86,7 @@ bool PacketHandler::handleMap(ENetPeer *peer, ENetPacket *packet)
 
 }
 
+//building the map
 bool PacketHandler::handleSpawn(ENetPeer *peer, ENetPacket *packet)
 {
 	uint8 bounds[] = {0x2c, 0x19, 0x00, 0x00, 0x40, 0x99, 0x14, 0x00, 0x00, 0x99, 0x14, 0x00, 0x00, 0x7f, 0x14, 0x00,\

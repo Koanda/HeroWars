@@ -230,9 +230,9 @@ typedef struct _MoveReq
 	uint8 sub_cmd1;
 	uint16 sub_cmd1Pad; //padding
 	uint16 sub_cmd1Def; // defintion of cmd
-	float x1;
-	float y1;
-	float z1;
+	float x1; //position where is clicked on
+	float y1; //-||-
+	float z1; //-||-
 	uint32 pad2; //padding
 	uint32 unk1; //Unk
 	uint8 sub_cmd2;
